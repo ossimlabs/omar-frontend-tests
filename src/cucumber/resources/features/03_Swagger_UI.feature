@@ -28,32 +28,32 @@ Feature: SwaggerUserInterface
 
   Scenario Outline: [Swagger-07] OMS Documentation is available
     Given that the <swaggerEndpoint> swagger page is available for <swaggerApp>
-    Then the <swaggerEndpoint> <params> param documentation should be present
+    Then the <swaggerEndpointSubName> <params> param documentation should be present
     Examples:
-      | swaggerApp | swaggerEndpoint | params                                |
-      | oms        | dataInfo        | getInfo                               |
-      | oms        | chipper         | chip, ortho                           |
-      | oms        | imageSpace      | getThumbnail, getTile, getTileOverlay |
+      | swaggerApp | swaggerEndpoint | swaggerEndpointSubName | params                                |
+      | oms        | dataInfo        | dataInfo               | getInfo                               |
+      | oms        | chipper         | chipper                | chip, ortho                           |
+      | oms        | imageSpace      | imageSpace             | getThumbnail, getTile, getTileOverlay |
 
   Scenario Outline: [Swagger-08] Stager Documentation is available
     Given that the <swaggerEndpoint> swagger page is available for <swaggerApp>
-    Then the <swaggerEndpoint> <params> param documentation should be present
+    Then the <swaggerEndpointSubName> <params> param documentation should be present
     Examples:
-      | swaggerApp | swaggerEndpoint | params                                                                               |
-      | stager     | rasterDataSet   | addRaster, getDistinctValues, getRasterFiles, getRasterFilesProcessing, removeRaster |
-      | stager     | videoDataSet    | addVideo, removeVideo                                                                |
+      | swaggerApp | swaggerEndpoint | swaggerEndpointSubName | params                                                                               |
+      | stager     | rasterDataSet   | dataManager            | addRaster, getDistinctValues, getRasterFiles, getRasterFilesProcessing, removeRaster |
+      | stager     | videoDataSet    | dataManager            | addVideo, removeVideo                                                                |
 
   Scenario Outline: [Swagger-09] AVRO Documentation is available
     Given that the <swaggerEndpoint> swagger page is available for <swaggerApp>
-    Then the <swaggerEndpoint> <params> param documentation should be present
+    Then the <swaggerEndpointSubName> <params> param documentation should be present
     Examples:
-      | swaggerApp | swaggerEndpoint | params                                                                                            |
-      | avro       | avro            | addFile, addMessage, listFiles, listMessages, resetFileProcessingStatus                           |
-      | avro       | ingestMetrics   | delete, endCopy, endIngest, endStaging, list, save, startCopy, startIngest, startStaging, summary |
+      | swaggerApp | swaggerEndpoint | swaggerEndpointSubName | params                                                                                            |
+      | avro       | avro            | avro                   | addFile, addMessage, listFiles, listMessages, resetFileProcessingStatus                           |
+      | avro       | ingestMetrics   | ingestMetrics          | delete, endCopy, endIngest, endStaging, list, save, startCopy, startIngest, startStaging, summary |
 
   Scenario Outline: [Swagger-10] Download Documentation is available
     Given that the <swaggerEndpoint> swagger page is available for <swaggerApp>
-    Then the <swaggerEndpoint> <params> param documentation should be present
+    Then the <swaggerEndpointSubName> <params> param documentation should be present
     Examples:
-      | swaggerApp | swaggerEndpoint | params   |
-      | download   | archive         | download |
+      | swaggerApp | swaggerEndpoint | swaggerEndpointSubName | params   |
+      | download   | archive         | archive                | download |
