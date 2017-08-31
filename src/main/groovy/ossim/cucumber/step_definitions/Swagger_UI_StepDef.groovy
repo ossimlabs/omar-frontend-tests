@@ -29,27 +29,27 @@ Before('@swagger_ui') {
     browser = new Browser(driver: new FirefoxDriver())
 }
 
-Given(~/^that the (.*) swagger page is available$/) { String swaggerApp ->
-    def url = "${config[swaggerApp + 'Url']}/api#!/${swaggerApp}"
+Given(~/^that the (.*) swagger page is available for (.*)$/) { String swaggerEndpoint, String swaggerApp ->
+    def url = "${config[swaggerApp + 'Url']}/api#!/${swaggerEndpoint}"
     browser.go(url)
 
     def pageTitle = browser.getTitle()
-    println "Page Title: ${pageTitle} for ${swaggerApp}"
+    println "Page Title: ${pageTitle} for ${swaggerApp}, endpoint ${swaggerEndpoint}"
     assert pageTitle == "Swagger UI"
 }
 
-Then(~/^the ([^\s]*) (.*) param documentation should be present$/) { String swaggerApp, String params ->
+Then(~/^the ([^\s]*) (.*) param documentation should be present$/) { String swaggerEndpoint, String params ->
     params.split(",").each {
         def param = it.trim()
 
         // give time for the page to gather all its resources
         sleep(2000)
         // click the hyperlink
-        browser.page.$("a", text: "/${swaggerApp}/${param}").click()
+        browser.page.$("a", text: "/${swaggerEndpoint}/${param}").click()
         // give some time for the box to display
         sleep(1000)
         // make sure the documentation box is visible
-        println "Checking that ${param} Swagger API exists for ${swaggerApp}"
-        assert browser.page.$("div", id: "${swaggerApp}_${param}_content").displayed == true
+        println "Checking that ${param} Swagger API exists for ${swaggerEndpoint}"
+        assert browser.page.$("div", id: "${swaggerEndpoint}_${param}_content").displayed == true
     }
 }
