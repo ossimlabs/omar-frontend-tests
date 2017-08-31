@@ -34,7 +34,7 @@ Given(~/^that the (.*) swagger page is available$/) { String swaggerApp ->
     browser.go(url)
 
     def pageTitle = browser.getTitle()
-    println "Page Title: ${pageTitle}"
+    println "Page Title: ${pageTitle} for ${swaggerApp}"
     assert pageTitle == "Swagger UI"
 }
 
@@ -49,6 +49,7 @@ Then(~/^the ([^\s]*) (.*) param documentation should be present$/) { String swag
         // give some time for the box to display
         sleep(1000)
         // make sure the documentation box is visible
+        println "Checking that ${param} Swagger API exists for ${swaggerApp}"
         assert browser.page.$("div", id: "${swaggerApp}_${param}_content").displayed == true
     }
 }
