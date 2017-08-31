@@ -38,14 +38,14 @@ Given(~/^that the (.*) swagger page is available for (.*)$/) { String swaggerEnd
     assert pageTitle == "Swagger UI"
 }
 
-Then(~/^the ([^\s]*) (.*) param documentation should be present$/) { String swaggerEndpoint, String params ->
+Then(~/^the ([^\s]*) (.*) param documentation should be present for (.*)$/) { String swaggerEndpointSubName, String params, String swaggerEndpoint ->
     params.split(",").each {
         def param = it.trim()
 
         // give time for the page to gather all its resources
         sleep(2000)
         // click the hyperlink
-        browser.page.$("a", text: "/${swaggerEndpoint}/${param}").click()
+        browser.page.$("a", text: "/${swaggerEndpointSubName}/${param}").click()
         // give some time for the box to display
         sleep(1000)
         // make sure the documentation box is visible
