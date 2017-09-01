@@ -10,9 +10,9 @@ The omar-frontend-tests are composed of 3 sets of tests, each for a different se
 
 These tests are made using Cucumber, a test language that resembles basic English. This allows anyone to look at the tests and understand their purpose and intent. Using the Cucumber tests as a guide, the tests are then converted into code. In the case of the frontend tests, Selenium is used to programatically control Firefox and Chrome browsers to test the UI services.
 
-*TLV-UI* - tests that the Time Lapse Viewer UI is working as intended using Selenium implementations of the Cucumber tests.
-*ImageSearch-UI* - tests that the ImageSearch UI is working as intended using Selenium implementations of the Cucumber tests.
-*Swagger-UI* - tests that the Swagger API pages exist for the appropriate applications using Selenium implementations of the Cucumber tests.
+- *TLV-UI* - tests that the Time Lapse Viewer UI is working as intended using Selenium implementations of the Cucumber tests.
+- *ImageSearch-UI* - tests that the ImageSearch UI is working as intended using Selenium implementations of the Cucumber tests.
+- *Swagger-UI* - tests that the Swagger API pages exist for the appropriate applications using Selenium implementations of the Cucumber tests.
 
 More details on the content of the tests can be found in the Cucumber *.feature* files located in *src/cucumber/resources/features*
 
