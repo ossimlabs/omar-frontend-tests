@@ -43,11 +43,11 @@ Then(~/^the ([^\s]*) (.*) param documentation should be present for (.*)$/) { St
         def param = it.trim()
 
         // give time for the page to gather all its resources
-        sleep(1000)
+        sleep(1200)
         // click the hyperlink
         browser.page.$("a", text: "/${swaggerEndpointSubName}/${param}").click()
         // give some time for the box to display
-        sleep(500)
+        sleep(750)
         // make sure the documentation box is visible
         println "Checking that ${param} Swagger API exists for ${swaggerEndpoint}"
         assert browser.page.$("div", id: "${swaggerEndpoint}_${param}_content").displayed == true
