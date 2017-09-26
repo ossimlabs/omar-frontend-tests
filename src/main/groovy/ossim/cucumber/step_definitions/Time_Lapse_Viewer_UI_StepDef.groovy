@@ -66,7 +66,8 @@ And(~/I add a (.*) annotation$/) {
                 def y1 = 10 //random.nextInt(yMax - yMin) + yMin
                 def x2 = 10 //random.nextInt(xMax - xMin) + xMin
                 def y2 = 10 //random.nextInt(yMax - yMin) + yMin
-                actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).click().moveByOffset(x2 - x1, y2 - y1).click().perform()
+                //actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).click().moveByOffset(x2 - x1, y2 - y1).click().perform()
+                actions.moveToElement(map.firstElement()).moveByOffset(x1, y1).click().moveByOffset(x2 - x1, y2 - y1).click().perform()
                 sleep(1000)
                 break
             case "line":
@@ -81,7 +82,8 @@ And(~/I add a (.*) annotation$/) {
                 def y4 = 5 //random.nextInt(yMax - yMin) + yMin
                 def x5 = 5 //random.nextInt(xMax - xMin) + xMin
                 def y5 = 5 //random.nextInt(yMax - yMin) + yMin
-                actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).click().moveByOffset(x2 - x1, y2 - y1).click().moveByOffset(x3 - x2, y3 - y2).click().moveByOffset(x4 - x3, y4 - y3).click().moveByOffset(x5 - x4, y5 - y4).click().perform()
+                //actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).click().moveByOffset(x2 - x1, y2 - y1).click().moveByOffset(x3 - x2, y3 - y2).click().moveByOffset(x4 - x3, y4 - y3).click().moveByOffset(x5 - x4, y5 - y4).click().perform()
+                actions.moveToElement(map.firstElement()).moveByOffset(x1, y1).click().moveByOffset(x2 - x1, y2 - y1).click().moveByOffset(x3 - x2, y3 - y2).click().moveByOffset(x4 - x3, y4 - y3).click().moveByOffset(x5 - x4, y5 - y4).click().perform()
                 browser.driver.executeScript("return tlv.drawAnnotationInteraction.finishDrawing();")
                 sleep(1000)
                 break
