@@ -44,6 +44,8 @@ And(~/I add a (.*) annotation$/) {
 
         def annotationButton = browser.page.$("body").find("a").find { it.text() == annotation.capitalize() }
         annotationButton.click()
+    
+        sleep(1000)
 
         def map = browser.page.$("#map")
         def random = new Random()
