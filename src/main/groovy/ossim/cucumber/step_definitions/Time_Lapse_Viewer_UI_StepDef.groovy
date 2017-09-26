@@ -47,11 +47,11 @@ And(~/I add a (.*) annotation$/) {
 
         def map = browser.page.$("#map")
         def random = new Random()
-        def startX = map.width / 2 as Integer
-        def startY = map.height / 2 as Integer
-        def xMax = map.width
+        def startX = 100 //map.width / 2 as Integer
+        def startY = 170 //map.height / 2 as Integer
+        def xMax = 150 //map.width
         def xMin = 50
-        def yMax = map.height
+        def yMax = 220 //map.height
         def yMin = 120
 
         def actions = new Actions(browser.driver)
