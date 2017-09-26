@@ -99,6 +99,7 @@ And(~/I add a (.*) annotation$/) {
         imageProperties.push(getCanvasData())
 
         browser.page.$("#annotationsDialog").find("button")[2].click()
+        sleep(1000)
 }
 
 And(~/I adjust the (.*) of a layer$/) {
