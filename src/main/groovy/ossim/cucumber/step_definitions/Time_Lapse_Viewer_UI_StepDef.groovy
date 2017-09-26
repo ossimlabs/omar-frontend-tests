@@ -74,8 +74,8 @@ And(~/I add a (.*) annotation$/) {
             case "polygon":
                 def x1 = 5 //random.nextInt(xMax - xMin) + xMin
                 def y1 = 5 //random.nextInt(yMax - yMin) + yMin
-                def x2 = 5 random.nextInt(xMax - xMin) + xMin
-                def y2 = 5 random.nextInt(yMax - yMin) + yMin
+                def x2 = 5 //random.nextInt(xMax - xMin) + xMin
+                def y2 = 5 //random.nextInt(yMax - yMin) + yMin
                 def x3 = 5 //random.nextInt(xMax - xMin) + xMin
                 def y3 = 5 //random.nextInt(yMax - yMin) + yMin
                 def x4 = 5 //random.nextInt(xMax - xMin) + xMin
