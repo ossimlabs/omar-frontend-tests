@@ -54,7 +54,7 @@ And(~/I add a (.*) annotation$/) {
         def xMax = map.width
         def xMin = 50
         def yMax = map.height
-        def yMin = 120
+        def yMin = 150
 
         def actions = new Actions(browser.driver)
         switch (annotation)
@@ -62,36 +62,36 @@ And(~/I add a (.*) annotation$/) {
             case "circle":
             case "rectangle":
             case "square":
-                def x1 = 10 //random.nextInt(xMax - xMin) + xMin
-                def y1 = 10 //random.nextInt(yMax - yMin) + yMin
-                def x2 = 10 //random.nextInt(xMax - xMin) + xMin
-                def y2 = 10 //random.nextInt(yMax - yMin) + yMin
-                //actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).click().moveByOffset(x2 - x1, y2 - y1).click().perform()
-                actions.moveToElement(map.firstElement()).moveByOffset(x1, y1).click().moveByOffset(x2, y2).click().perform()
+                def x1 = random.nextInt(xMax - xMin) + xMin
+                def y1 = random.nextInt(yMax - yMin) + yMin
+                def x2 = random.nextInt(xMax - xMin) + xMin
+                def y2 = random.nextInt(yMax - yMin) + yMin
+                actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).click().moveByOffset(x2 - x1, y2 - y1).click().perform()
+                //actions.moveToElement(map.firstElement()).moveByOffset(x1, y1).click().moveByOffset(x2, y2).click().perform()
                 sleep(1000)
                 break
             case "line":
             case "polygon":
-                def x1 = 0 //random.nextInt(xMax - xMin) + xMin
-                def y1 = 0 //random.nextInt(yMax - yMin) + yMin
-                def x2 = 20 //random.nextInt(xMax - xMin) + xMin
-                def y2 = 20 //random.nextInt(yMax - yMin) + yMin
-                def x3 = 20 //random.nextInt(xMax - xMin) + xMin
-                def y3 = 20 //random.nextInt(yMax - yMin) + yMin
-                //def x4 = 5 //random.nextInt(xMax - xMin) + xMin
-                //def y4 = 5 //random.nextInt(yMax - yMin) + yMin
-                //def x5 = 5 //random.nextInt(xMax - xMin) + xMin
-                //def y5 = 5 //random.nextInt(yMax - yMin) + yMin
-                //actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).click().moveByOffset(x2 - x1, y2 - y1).click().moveByOffset(x3 - x2, y3 - y2).click().moveByOffset(x4 - x3, y4 - y3).click().moveByOffset(x5 - x4, y5 - y4).click().perform()
-                actions.moveToElement(map.firstElement()).moveByOffset(x1, y1).click().moveByOffset(x2, y2).click().moveByOffset(x3, y3).click().perform()
+                def x1 = random.nextInt(xMax - xMin) + xMin
+                def y1 = random.nextInt(yMax - yMin) + yMin
+                def x2 = random.nextInt(xMax - xMin) + xMin
+                def y2 = random.nextInt(yMax - yMin) + yMin
+                def x3 = random.nextInt(xMax - xMin) + xMin
+                def y3 = random.nextInt(yMax - yMin) + yMin
+                def x4 = random.nextInt(xMax - xMin) + xMin
+                def y4 = random.nextInt(yMax - yMin) + yMin
+                def x5 = random.nextInt(xMax - xMin) + xMin
+                def y5 = random.nextInt(yMax - yMin) + yMin
+                actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).click().moveByOffset(x2 - x1, y2 - y1).click().moveByOffset(x3 - x2, y3 - y2).click().moveByOffset(x4 - x3, y4 - y3).click().moveByOffset(x5 - x4, y5 - y4).click().perform()
+                //actions.moveToElement(map.firstElement()).moveByOffset(x1, y1).click().moveByOffset(x2, y2).click().moveByOffset(x3, y3).click().perform()
                 browser.driver.executeScript("return tlv.drawAnnotationInteraction.finishDrawing();")
                 sleep(1000)
                 break
             case "point":
-                def x1 = 10 //random.nextInt(xMax - xMin) + xMin
-                def y1 = 10 //random.nextInt(yMax - yMin) + yMin
-                //actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).click().perform()
-                actions.moveToElement(map.firstElement()).moveByOffset(x1, y1).click().perform()
+                def x1 = random.nextInt(xMax - xMin) + xMin
+                def y1 = random.nextInt(yMax - yMin) + yMin
+                actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).click().perform()
+                //actions.moveToElement(map.firstElement()).moveByOffset(x1, y1).click().perform()
                 sleep(1000)
                 break
         }
