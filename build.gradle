@@ -50,7 +50,8 @@ task frontend() {
             classpath = configurations.cucumberRuntime
             args = [
                     "--tags",
-                    "@o2_ui_search, @swagger_ui, @tlv_ui",
+                    "@o2_ui_search, @tlv_ui",
+                    //"@swagger_ui",
                     "--tags",
                     "~@C2S",
                     '--plugin', 'json:build/frontend.json',
