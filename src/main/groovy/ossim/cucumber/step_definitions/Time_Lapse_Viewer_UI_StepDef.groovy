@@ -44,6 +44,8 @@ And(~/I add a (.*) annotation$/) {
 
         def annotationButton = browser.page.$("body").find("a").find { it.text() == annotation.capitalize() }
         annotationButton.click()
+    
+        sleep(1000)
 
         def map = browser.page.$("#map")
         def random = new Random()
@@ -52,7 +54,7 @@ And(~/I add a (.*) annotation$/) {
         def xMax = map.width
         def xMin = 50
         def yMax = map.height
-        def yMin = 120
+        def yMin = 150
 
         def actions = new Actions(browser.driver)
         switch (annotation)
@@ -65,6 +67,7 @@ And(~/I add a (.*) annotation$/) {
                 def x2 = random.nextInt(xMax - xMin) + xMin
                 def y2 = random.nextInt(yMax - yMin) + yMin
                 actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).click().moveByOffset(x2 - x1, y2 - y1).click().perform()
+                //actions.moveToElement(map.firstElement()).moveByOffset(x1, y1).click().moveByOffset(x2, y2).click().perform()
                 sleep(1000)
                 break
             case "line":
@@ -80,6 +83,7 @@ And(~/I add a (.*) annotation$/) {
                 def x5 = random.nextInt(xMax - xMin) + xMin
                 def y5 = random.nextInt(yMax - yMin) + yMin
                 actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).click().moveByOffset(x2 - x1, y2 - y1).click().moveByOffset(x3 - x2, y3 - y2).click().moveByOffset(x4 - x3, y4 - y3).click().moveByOffset(x5 - x4, y5 - y4).click().perform()
+                //actions.moveToElement(map.firstElement()).moveByOffset(x1, y1).click().moveByOffset(x2, y2).click().moveByOffset(x3, y3).click().perform()
                 browser.driver.executeScript("return tlv.drawAnnotationInteraction.finishDrawing();")
                 sleep(1000)
                 break
@@ -87,6 +91,7 @@ And(~/I add a (.*) annotation$/) {
                 def x1 = random.nextInt(xMax - xMin) + xMin
                 def y1 = random.nextInt(yMax - yMin) + yMin
                 actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).click().perform()
+                //actions.moveToElement(map.firstElement()).moveByOffset(x1, y1).click().perform()
                 sleep(1000)
                 break
         }
@@ -94,6 +99,7 @@ And(~/I add a (.*) annotation$/) {
         imageProperties.push(getCanvasData())
 
         browser.page.$("#annotationsDialog").find("button")[2].click()
+        sleep(1000)
 }
 
 And(~/I adjust the (.*) of a layer$/) {
