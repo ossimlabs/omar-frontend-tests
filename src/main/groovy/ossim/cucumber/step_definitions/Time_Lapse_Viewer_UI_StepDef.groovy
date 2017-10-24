@@ -344,7 +344,7 @@ When(~/I search for imagery near (.*)$/) {
 
         def layers
         // wait a maximum of 10 seconds for results to return
-        def timer = 20
+        def timer = 30
         while (timer > 0)
         {
             sleep(1000)
