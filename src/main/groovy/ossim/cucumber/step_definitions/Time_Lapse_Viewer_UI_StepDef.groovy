@@ -357,9 +357,8 @@ When(~/I search for imagery near (.*)$/) {
             else
             {
                 timer -= 1
+                if ( timer == 0 ) { println "Search timed out..." }
             }
-
-            if ( timer == 0 ) { println "Search timed out..." }
         }
 
 
