@@ -358,6 +358,7 @@ When(~/I search for imagery near (.*)$/) {
             {
                 timer -= 1
             }
+               println timer
         }
 
 
