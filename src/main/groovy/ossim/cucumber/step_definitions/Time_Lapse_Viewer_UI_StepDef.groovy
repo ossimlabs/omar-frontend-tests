@@ -350,6 +350,7 @@ When(~/I search for imagery near (.*)$/) {
             sleep(1000)
 
             layers = browser.driver.executeScript("return tlv.layers ? tlv.layers.length : 0;") as Integer
+            println layers
             if (layers > 0)
             {
                 timer = 0
@@ -359,6 +360,7 @@ When(~/I search for imagery near (.*)$/) {
                 timer -= 1
                 if ( timer == 0 ) { println "Search timed out..." }
             }
+            println new Date()
         }
 
 
