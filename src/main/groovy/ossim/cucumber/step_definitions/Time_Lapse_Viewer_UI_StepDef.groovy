@@ -344,12 +344,13 @@ When(~/I search for imagery near (.*)$/) {
 
         def layers
         // wait a maximum of 10 seconds for results to return
-        def timer = 10
+        def timer = 30
         while (timer > 0)
         {
             sleep(1000)
 
             layers = browser.driver.executeScript("return tlv.layers ? tlv.layers.length : 0;") as Integer
+            println layers
             if (layers > 0)
             {
                 timer = 0
@@ -357,7 +358,10 @@ When(~/I search for imagery near (.*)$/) {
             else
             {
                 timer -= 1
+                if ( timer == 0 ) { println "Search timed out..." }
             }
+            println new Date()
+            browser.driver.executeScript("return JSON.stringify(tlv.debug);")
         }
 
 
