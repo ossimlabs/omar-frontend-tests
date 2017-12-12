@@ -343,11 +343,11 @@ When(~/I search for imagery near (.*)$/) {
         browser.page.$("#searchDialog").find(".modal-footer").find(".btn-primary")[0].click()
 
         def layers
-        // wait a maximum of 10 seconds for results to return
+        // wait a maximum of 5 minutes for results to return
         def timer = 30
         while (timer > 0)
         {
-            sleep(1000)
+            sleep(10000)
 
             layers = browser.driver.executeScript("return tlv.layers ? tlv.layers.length : 0;") as Integer
             println layers
