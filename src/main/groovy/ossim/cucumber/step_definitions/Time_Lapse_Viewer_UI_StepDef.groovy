@@ -362,6 +362,7 @@ When(~/I search for imagery near (.*)$/) {
             }
             println new Date()
             println browser.driver.executeScript("return tlv.debug;")
+            println browser.driver.executeScript("return tlv.searchDebug;")
         }
 
 
