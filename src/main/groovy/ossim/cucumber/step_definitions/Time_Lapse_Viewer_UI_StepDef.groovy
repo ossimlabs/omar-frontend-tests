@@ -343,8 +343,8 @@ When(~/I search for imagery near (.*)$/) {
         browser.page.$("#searchDialog").find(".modal-footer").find(".btn-primary")[0].click()
 
         def layers
-        // wait a maximum of 5 minutes for results to return
-        def timer = 30
+        // wait a maximum of 30 seconds for results to return
+        def timer = 3
         while (timer > 0)
         {
             sleep(10000)
