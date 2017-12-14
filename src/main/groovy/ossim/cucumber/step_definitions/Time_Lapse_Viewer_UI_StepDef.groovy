@@ -340,6 +340,7 @@ When(~/I search for imagery near (.*)$/) {
         browser.page.$("#searchStartDateTimePicker").children()[0].value("01/01/2000 00:00:00")
         sleep(1000)
 
+        println "Search Dialog Displayed: ${ browser.page.$("#searchDialog").isDisplayed() }"
         browser.page.$("#searchDialog").find(".modal-footer").find(".btn-primary")[0].click()
 
         def layers
@@ -351,7 +352,7 @@ When(~/I search for imagery near (.*)$/) {
             sleep(10000)
 
             layers = browser.driver.executeScript("return tlv.layers ? tlv.layers.length : 0;") as Integer
-            println layers
+            println "tlv.layers: ${ layers }"
             if (layers > 0)
             {
                 timer = 0
