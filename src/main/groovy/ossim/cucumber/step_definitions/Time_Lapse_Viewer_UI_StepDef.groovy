@@ -347,6 +347,7 @@ When(~/I search for imagery near (.*)$/) {
         def timer = 3
         while (timer > 0)
         {
+            println new Date()
             sleep(10000)
 
             layers = browser.driver.executeScript("return tlv.layers ? tlv.layers.length : 0;") as Integer
@@ -360,7 +361,7 @@ When(~/I search for imagery near (.*)$/) {
                 timer -= 1
                 if ( timer == 0 ) { println "Search timed out..." }
             }
-            println new Date()
+            
             println browser.driver.executeScript("return tlv.debug;")
             println browser.driver.executeScript("return tlv.searchDebug;")
         }
