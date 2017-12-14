@@ -341,6 +341,7 @@ When(~/I search for imagery near (.*)$/) {
         sleep(1000)
 
         println "Search Dialog Displayed: ${ browser.page.$("#searchDialog").isDisplayed() }"
+        sleep( 10000 )
         browser.page.$("#searchDialog").find(".modal-footer").find(".btn-primary")[0].click()
 
         def layers
