@@ -365,7 +365,7 @@ When(~/I search for imagery near (.*)$/) {
             }
             
             println browser.driver.executeScript("return tlv.debug;")
-            println browser.driver.executeScript("return tlv.searchDebug;")
+            println browser.driver.executeScript("return tlv.searchAjax;")
         }
 
 
