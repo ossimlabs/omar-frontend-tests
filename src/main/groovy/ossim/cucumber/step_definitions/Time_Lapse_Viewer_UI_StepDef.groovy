@@ -364,7 +364,7 @@ When(~/I search for imagery near (.*)$/) {
                 if ( timer == 0 ) { println "Search timed out..." }
             }
             
-            println browser.driver.executeScript("return tlv.pageLoad;")
+
                         println browser.driver.executeScript("return tlv.searchFunction;")
                                     println browser.driver.executeScript("return tlv.searchParams;")
                         println browser.driver.executeScript("return tlv.filter;")
