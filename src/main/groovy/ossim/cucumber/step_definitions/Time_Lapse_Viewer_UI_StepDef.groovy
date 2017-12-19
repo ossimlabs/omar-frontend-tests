@@ -340,8 +340,6 @@ When(~/I search for imagery near (.*)$/) {
         browser.page.$("#searchStartDateTimePicker").children()[0].value("01/01/2000 00:00:00")
         sleep(1000)
 
-        println "Search Dialog Displayed: ${ browser.page.$("#searchDialog").isDisplayed() }"
-        sleep( 10000 )
         browser.page.$("#searchDialog").find(".modal-footer").find(".btn-primary")[0].click()
 
         def layers
@@ -360,13 +358,10 @@ When(~/I search for imagery near (.*)$/) {
             }
             else
             {
+                println browser.driver.executeScript("return tlv.searchFunction;")
                 timer -= 1
                 if ( timer == 0 ) { println "Search timed out..." }
             }
-            
-
-                        println browser.driver.executeScript("return tlv.searchFunction;")
-            println browser.driver.executeScript("return tlv.searchAjax;")
         }
 
 
