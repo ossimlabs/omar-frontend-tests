@@ -15,7 +15,7 @@ Feature: TLVUserInterface
 # O2SVC-757 (U) OC2S GUI shall provide a user with the option to add and view annotations.
   Scenario: TLV annotations
     Given that I am starting at the TLV home page using Chrome
-    When I search for imagery near Hushanding, Taiwan
+    When I search for imagery near Paris, FR
     And I add a circle annotation
     And I add a line annotation
     And I add a point annotation
@@ -26,7 +26,7 @@ Feature: TLVUserInterface
 
   Scenario: TLV annotations
     Given that I am starting at the TLV home page using Firefox
-    When I search for imagery near Hushanding, Taiwan
+    When I search for imagery near Paris, FR
     And I add a circle annotation
     And I add a line annotation
     And I add a point annotation
@@ -102,33 +102,33 @@ Feature: TLVUserInterface
 # O2SVC-744 (U) OC2S shall provide the TLV Web User Interface
   Scenario: TLV search by Decimal Degrees
     Given that I am starting at the TLV home page using Chrome
-    When I search for imagery near 24.570558, 120.741699
-    Then I get images that contain 24.570558, 120.741699
+    When I search for imagery near 48.848775, 2.348800
+    Then I get images that contain 48.848775, 2.348800
 
   Scenario: TLV search by Decimal Degrees
     Given that I am starting at the TLV home page using Firefox
-    When I search for imagery near 24.570558, 120.741699
-    Then I get images that contain 24.570558, 120.741699
+    When I search for imagery near 48.848775, 2.348800
+    Then I get images that contain 48.848775, 2.348800
 
   Scenario: TLV search by Degrees Minutes Seconds
     Given that I am starting at the TLV home page using Chrome
-    When I search for imagery near 23° 35' 04.41" S 138° 59' 57.72" E
-    Then I get images that contain -23.584557, 138.999367
+    When I search for imagery near 48° 50' 55.59" N 002° 20' 55.68" E
+    Then I get images that contain 48.848775, 2.348800
 
   Scenario: TLV search by Degrees Minutes Seconds
     Given that I am starting at the TLV home page using Firefox
-    When I search for imagery near 23° 35' 04.41" S 138° 59' 57.72" E
-    Then I get images that contain -23.584557, 138.999367
+    When I search for imagery near 48° 50' 55.59" N 002° 20' 55.68" E
+    Then I get images that contain 48.848775, 2.348800
 
   Scenario: TLV search by MGRS
     Given that I am starting at the TLV home page using Chrome
-    When I search for imagery near 55GEN2127254539
-    Then I get images that contain -42.861443, 147.260399
+    When I search for imagery near 31UDQ5222610849
+    Then I get images that contain 48.848775, 2.348800
 
   Scenario: TLV search by MGRS
     Given that I am starting at the TLV home page using Firefox
-    When I search for imagery near 55GEN2127254539
-    Then I get images that contain -42.861443, 147.260399
+    When I search for imagery near 31UDQ5222610849
+    Then I get images that contain 48.848775, 2.348800
 
   Scenario: TLV search by Placename
     Given that I am starting at the TLV home page using Chrome
