@@ -112,12 +112,12 @@ Feature: TLVUserInterface
 
   Scenario: TLV search by Degrees Minutes Seconds
     Given that I am starting at the TLV home page using Chrome
-    When I search for imagery near 48° 50' 55.59" N 002° 20' 55.68" E
+    When I search for imagery near 485055.59N 0022055.68E
     Then I get images that contain 48.848775, 2.348800
 
   Scenario: TLV search by Degrees Minutes Seconds
     Given that I am starting at the TLV home page using Firefox
-    When I search for imagery near 48° 50' 55.59" N 002° 20' 55.68" E
+    When I search for imagery near 485055.59N 0022055.68E
     Then I get images that contain 48.848775, 2.348800
 
   Scenario: TLV search by MGRS
