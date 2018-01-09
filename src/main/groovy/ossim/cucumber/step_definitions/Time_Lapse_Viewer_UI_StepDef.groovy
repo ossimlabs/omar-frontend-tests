@@ -5,6 +5,7 @@ import groovy.json.JsonOutput
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.interactions.Actions
 import org.openqa.selenium.firefox.FirefoxDriver
+import org.openqa.selenium.firefox.FirefoxProfile
 import org.openqa.selenium.Keys
 import ossim.cucumber.config.CucumberConfig
 
@@ -44,7 +45,7 @@ And(~/I add a (.*) annotation$/) {
 
         def annotationButton = browser.page.$("body").find("a").find { it.text() == annotation.capitalize() }
         annotationButton.click()
-    
+
         sleep(1000)
 
         def map = browser.page.$("#map")
@@ -174,7 +175,18 @@ Given(~/^that I am starting at the TLV home page using (.*)$/) {
         switch (browserType)
         {
             case "Chrome": browser = new Browser(driver: new ChromeDriver()); break;
-            case "Firefox": browser = new Browser(driver: new FirefoxDriver()); break;
+            case "Firefox":
+                def driver
+                def file = new File( config.browsers.firefox.profile )
+                if ( file.exists() ) {
+                    def profile = new FirefoxProfile( file )
+                    driver = new FirefoxDriver( profile )
+                }
+                else {
+                    driver = new FirefoxDriver()
+                }
+                browser = new Browser( driver: driver )
+                break
         }
 
         browser.go(homePageUrl)

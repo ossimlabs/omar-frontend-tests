@@ -11,3 +11,9 @@ omsUrl = "${rbtcloudRootDir}/omar-oms"
 stagerUrl = "${rbtcloudRootDir}/omar-stager"
 avroUrl = "${rbtcloudRootDir}/omar-avro"
 downloadUrl = "${rbtcloudRootDir}/omar-download"
+
+browsers {
+    firefox {
+        profile = "/usr/local/browser_profiles/firefox/cucumber_ff_profile"
+    }
+}
