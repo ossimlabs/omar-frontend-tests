@@ -15,7 +15,7 @@ Feature: TLVUserInterface
 # O2SVC-757 (U) OC2S GUI shall provide a user with the option to add and view annotations.
 #  Scenario: TLV annotations
 #    Given that I am starting at the TLV home page using Chrome
-#    When I search for imagery near Hushanding, Taiwan
+#    When I search for imagery near Lenah Valley, Australia
 #    And I add a circle annotation
 #    And I add a line annotation
 #    And I add a point annotation
@@ -26,7 +26,7 @@ Feature: TLVUserInterface
 
   Scenario: TLV annotations
     Given that I am starting at the TLV home page using Firefox
-    When I search for imagery near Hushanding, Taiwan
+    When I search for imagery near Lenah Valley, Australia
     And I add a circle annotation
     And I add a line annotation
     And I add a point annotation
@@ -102,13 +102,13 @@ Feature: TLVUserInterface
 # O2SVC-744 (U) OC2S shall provide the TLV Web User Interface
 #  Scenario: TLV search by Decimal Degrees
 #    Given that I am starting at the TLV home page using Chrome
-#    When I search for imagery near 24.570558, 120.741699
-#    Then I get images that contain 24.570558, 120.741699
+#    When I search for imagery near -23.591080, 138.980708
+#    Then I get images that contain -23.591080, 138.980708
 
   Scenario: TLV search by Decimal Degrees
     Given that I am starting at the TLV home page using Firefox
-    When I search for imagery near 24.570558, 120.741699
-    Then I get images that contain 24.570558, 120.741699
+    When I search for imagery near -23.591080, 138.980708
+    Then I get images that contain -23.591080, 138.980708
 
 #  Scenario: TLV search by Degrees Minutes Seconds
 #    Given that I am starting at the TLV home page using Chrome
