@@ -27,7 +27,16 @@ Before('@o2_ui_search') {
     remoteDisplay = command.execute()
 
     println "Starting browser..."
-    browser = new Browser(driver: new FirefoxDriver())
+    def driver
+    def file = new File( config.browsers.firefox.profile )
+    if ( file.exists() ) {
+        def profile = new FirefoxProfile( file )
+        driver = new FirefoxDriver( profile )
+    }
+    else {
+        driver = new FirefoxDriver()
+    }
+    browser = new Browser( driver: driver )
 }
 
 Given(~/^that I am starting at the O2 Home page$/) { ->
