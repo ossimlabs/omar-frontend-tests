@@ -2,6 +2,7 @@ package ossim.cucumber.step_definitions
 
 import geb.Browser
 import org.openqa.selenium.firefox.FirefoxDriver
+import org.openqa.selenium.firefox.FirefoxProfile
 import ossim.cucumber.config.CucumberConfig
 
 this.metaClass.mixin(cucumber.api.groovy.Hooks)
