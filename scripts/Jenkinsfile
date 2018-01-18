@@ -3,7 +3,7 @@ node {
     env.WORKSPACE=pwd()
     env.DISPLAY=":1"
     env.OSSIM_MAVEN_PROXY="https://artifactory.ossim.io/artifactory/ossim-deps"
-    env.CUCUMBER_CONFIG_LOCATION="${env.WORKSPACE}/omar-frontend-tests/conf/cucumber-config-release.groovy"
+    env.CUCUMBER_CONFIG_LOCATION="${env.WORKSPACE}/${env.S3_CONFIG_FILE}"
     try{
         stage("Checkout"){
            dir("ossim-ci"){
@@ -17,6 +17,8 @@ node {
         stage("Run Test"){
             dir("${env.WORKSPACE}/omar-frontend-tests"){
                sh """
+		aws s3 cp s3://${env.S3_CONFIG_FILE} ${env.WORKSPACE}/${env.S3_CONFIG_FILE}
+		ls -alhR ../
                 ./gradlew frontend
                 echo ""
                """
