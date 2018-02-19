@@ -166,7 +166,7 @@ And(~/I adjust the (.*) of a layer$/) {
 }
 
 And(~/I click the Summary Table button$/) { ->
-    def summaryTableButton = browser.page.$("button", title: "Summary Table")
+    def summaryTableButton = browser.page.$("div", class: "summary-table-control")
     summaryTableButton.click()
 
     sleep(1000)
