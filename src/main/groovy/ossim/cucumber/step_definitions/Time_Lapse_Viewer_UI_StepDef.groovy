@@ -166,6 +166,7 @@ And(~/I adjust the (.*) of a layer$/) {
 }
 
 And(~/I click the Summary Table button$/) { ->
+    browser.driver.executeScript("return buildSummaryTable();")
     browser.driver.executeScript("return \$( '#summaryTableDialog' ).modal( 'show' );")
     //def summaryTableButton = browser.page.$("div", class: "summary-table-control")
     //summaryTableButton.click()
