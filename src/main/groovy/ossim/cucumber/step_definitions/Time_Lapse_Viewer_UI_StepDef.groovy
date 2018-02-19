@@ -108,8 +108,9 @@ And(~/I adjust the (.*) of a layer$/) {
 
         println "Adjusting ${imageProperty}"
 
-        def imagePropertiesButton = browser.page.$("body").find("a").find { it.text() == "Image Properties" }
-        imagePropertiesButton.click()
+        //def imagePropertiesButton = browser.page.$("body").find("a").find { it.text() == "Image Properties" }
+        //imagePropertiesButton.click()
+        browser.driver.executeScript("return $('#imagePropertiesDialog').show();")
 
         switch (imageProperty)
         {
