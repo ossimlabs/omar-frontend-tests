@@ -21,8 +21,8 @@ node {
         stage("Run Test"){
             dir("${env.WORKSPACE}/omar-frontend-tests"){
                sh """
-		aws s3 cp s3://${env.S3_CONFIG_FILE} ${env.WORKSPACE}/${env.S3_CONFIG_FILE}
-                ./gradlew frontend
+		        aws s3 cp s3://${env.S3_CONFIG_FILE} ${env.WORKSPACE}/${env.S3_CONFIG_FILE}
+                gradle frontend
                 echo ""
                """
             }
