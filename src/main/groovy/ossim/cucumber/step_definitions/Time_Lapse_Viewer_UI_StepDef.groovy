@@ -145,7 +145,7 @@ And(~/I adjust the (.*) of a layer$/) {
                 break
             case "DRA region":
                 def select = browser.page.$("#dynamicRangeRegionSelect")
-                def option = select.find("option").find { it.text() == "Global" }
+                def option = select.find("option").find { it.text() == "Viewport" }
                 option.click()
                 break
             case "interpolation":
