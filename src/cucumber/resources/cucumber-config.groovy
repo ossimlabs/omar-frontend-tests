@@ -10,6 +10,12 @@ switch(targetDeployment) {
    case "prod":
       rbtcloudRootDir = "https://omar-prod.ossim.io"
       break
+   case "blue":
+      rbtcloudRootDir = "https://omar-blue.ossim.io"
+      break
+   case "green":
+      rbtcloudRootDir = "https://omar-green.ossim.io"
+      break
    case "rel":
       rbtcloudRootDir = "https://omar-rel.ossim.io"
       break
