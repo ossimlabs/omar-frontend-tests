@@ -1,28 +1,7 @@
 rbtcloudRootDir = "NOT_ASSIGNED"
 targetDeployment = System.getenv("TEST_PROFILE")
-switch(targetDeployment) {
-   case "dev":
-      rbtcloudRootDir = "https://omar-dev.ossim.io"
-      break
-   case "stage":
-      rbtcloudRootDir = "https://omar-stage.ossim.io"
-      break
-   case "prod":
-      rbtcloudRootDir = "https://omar-prod.ossim.io"
-      break
-   case "blue":
-      rbtcloudRootDir = "https://omar-blue.ossim.io"
-      break
-   case "green":
-      rbtcloudRootDir = "https://omar-green.ossim.io"
-      break
-   case "rel":
-      rbtcloudRootDir = "https://omar-rel.ossim.io"
-      break
-   default:
-      rbtcloudRootDir = "https://omar-dev.ossim.io"
-      break
-}
+domainName = System.getenv("DOMAIN_NAME")
+rbtcloudRootDir = "https://omar-${targetDeployment}.${domainName}"
 
 println("\nOMAR URL being tested: ${rbtcloudRootDir}\n")
 
