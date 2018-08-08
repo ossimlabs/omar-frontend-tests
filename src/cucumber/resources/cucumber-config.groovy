@@ -1,6 +1,11 @@
-rbtcloudRootDir = "NOT_ASSIGNED"
-targetDeployment = System.getenv("TEST_PROFILE")
+targetDeployment = System.getenv("TARGET_DEPLOYMENT")
+if (!targetDeployment) {
+   targetDeployment = "dev"
+}
 domainName = System.getenv("DOMAIN_NAME")
+if (!domainName) {
+   domainName = "ossim.io"
+}
 rbtcloudRootDir = "https://omar-${targetDeployment}.${domainName}"
 
 println("\nOMAR URL being tested: ${rbtcloudRootDir}\n")

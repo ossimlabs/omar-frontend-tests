@@ -18,7 +18,7 @@ More details on the content of the tests can be found in the Cucumber *.feature*
 
 ### Automated Execution
 
-The frontend tests are automatically executed using a Jenkins build on https://jenkins.ossim.io - the job name is omar-frontend-tests-dev for the dev branch and omar-frontend-tests-release for the master branch. The tests run nightly.
+The frontend tests are automatically executed using a Jenkins build on https://jenkins.ossim.io - the job name is omar-frontend-tests-dev for the dev branch and omar-frontend-tests-stage for the master branch. The tests run nightly.
 
 ### Manual Execution
 
