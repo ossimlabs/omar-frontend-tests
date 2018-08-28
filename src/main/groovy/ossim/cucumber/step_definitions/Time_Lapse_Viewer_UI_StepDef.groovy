@@ -110,7 +110,7 @@ And(~/I adjust the (.*) of a layer$/) {
         println "Adjusting ${imageProperty}"
 
         browser.driver.executeScript("return displayNavbar();")
-        def imagePropertiesButton = browser.page.$("body").find("a").find { it.text() == "Image Properties" }
+        def imagePropertiesButton = browser.page.$("body").find("a").find { it.@title == "Image Properties" }
         imagePropertiesButton.click()
 
 
