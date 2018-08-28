@@ -39,7 +39,7 @@ And(~/I add a (.*) annotation$/) {
         println "Adding ${annotation} annotation..."
 
         browser.driver.executeScript("return displayNavbar();")
-        def annotationsButton = browser.page.$("body").find("a").find { it.text() == "Annotations" }
+        def annotationsButton = browser.page.$("body").find("a").find { it.@title == "Annotations" }
         annotationsButton.click()
 
         sleep(1000)
@@ -112,7 +112,7 @@ And(~/I adjust the (.*) of a layer$/) {
         browser.driver.executeScript("return displayNavbar();")
         def imagePropertiesButton = browser.page.$("body").find("a").find { it.text() == "Image Properties" }
         imagePropertiesButton.click()
-        
+
 
         switch (imageProperty)
         {
