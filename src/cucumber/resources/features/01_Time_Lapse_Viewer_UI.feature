@@ -1,4 +1,4 @@
-@tlv_ui
+
 Feature: TLVUserInterface
 
 # O2SVC-710 (U) OC2S shall provide the capability for analsyts to build a Time Lapse Viewer (TLV) flipbook product within a specified date range
@@ -6,6 +6,9 @@ Feature: TLVUserInterface
 #    Given that I am starting at the TLV home page using Chrome
 #    When I search for imagery near Paris, France
 #    Then all images should be within the date range specified
+
+  Scenario: Start
+    Given I am starting the selenium server
 
   Scenario: TLV acquisition date search
     Given that I am starting at the TLV home page using Firefox
@@ -152,3 +155,6 @@ Feature: TLVUserInterface
     When I search for imagery near Paris, France
     And I click the Summary Table button
     Then a table appears with the stack's metadata
+
+  Scenario: Stop
+    Given I am stopping the selenium server

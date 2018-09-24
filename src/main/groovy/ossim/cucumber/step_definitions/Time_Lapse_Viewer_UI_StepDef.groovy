@@ -201,6 +201,22 @@ Given(~/^that I am starting at the TLV home page using (.*)$/) {
         assert pageTitle == "Time Lapse Viewer (TLV)"
 }
 
+Given(~/^I am starting the selenium server$/) {
+    ->
+        println "Starting remote display..."
+        def command = ["Xvfb", ":1", "-screen", "0", "1366x768x24", "-ac"]
+        remoteDisplay = command.execute()
+}
+
+Given(~/^I am stopping the selenium server$/) {
+    ->
+        println "Stopping browser..."
+        browser.quit()
+
+        println "Stopping remote display..."
+        remoteDisplay.waitForOrKill(1)
+}
+
 Then(~/a table appears with the stack's metadata$/) { ->
 
 
