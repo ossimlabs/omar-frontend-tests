@@ -19,7 +19,7 @@ def homePageUrl = config.tlvUrl
 def imageProperties = []
 
 
-After('@tlv_ui') {
+After('@tlv_ui_end') {
     println "Stopping browser..."
     browser.quit()
 
@@ -27,7 +27,7 @@ After('@tlv_ui') {
     remoteDisplay.waitForOrKill(1)
 }
 
-Before('@tlv_ui') {
+Before('@tlv_ui_start') {
     println "Starting remote display..."
     def command = ["Xvfb", ":1", "-screen", "0", "1366x768x24", "-ac"]
     remoteDisplay = command.execute()
