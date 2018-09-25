@@ -7,6 +7,9 @@ Feature: TLVUserInterface
 #    When I search for imagery near Paris, France
 #    Then all images should be within the date range specified
 
+  Scenario: Start
+    Given I am starting the tlv ui selenium server
+
   Scenario: TLV acquisition date search
     Given that I am starting at the TLV home page using Firefox
     When I search for imagery near Paris, France
@@ -152,3 +155,6 @@ Feature: TLVUserInterface
     When I search for imagery near Paris, France
     And I click the Summary Table button
     Then a table appears with the stack's metadata
+
+  Scenario: Stop
+    Given I am stopping the tlv ui selenium server

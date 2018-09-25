@@ -19,18 +19,21 @@ def homePageUrl = config.tlvUrl
 def imageProperties = []
 
 
-After('@tlv_ui') {
-    println "Stopping browser..."
-    browser.quit()
 
-    println "Stopping remote display..."
-    remoteDisplay.waitForOrKill(1)
+Given(~/^I am starting the tlv ui selenium server$/) {
+    ->
+        println "Starting remote display..."
+        def command = ["Xvfb", ":1", "-screen", "0", "1366x768x24", "-ac"]
+        remoteDisplay = command.execute()
 }
 
-Before('@tlv_ui') {
-    println "Starting remote display..."
-    def command = ["Xvfb", ":1", "-screen", "0", "1366x768x24", "-ac"]
-    remoteDisplay = command.execute()
+Given(~/^I am stopping the tlv ui selenium server$/) {
+    ->
+        println "Stopping browser..."
+        browser.quit()
+
+        println "Stopping remote display..."
+        remoteDisplay.waitForOrKill(1)
 }
 
 And(~/I add a (.*) annotation$/) {

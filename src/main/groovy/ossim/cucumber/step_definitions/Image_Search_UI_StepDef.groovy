@@ -13,31 +13,32 @@ def config = CucumberConfig.config
 def homePageUrl = config.rbtcloudRootDir
 remoteDisplay = null
 
+Given(~/^I am starting the image search selenium server$/) {
+    ->
+        println "Starting remote display..."
+        def command = ["Xvfb", ":1", "-screen", "0", "1366x768x24", "-ac"]
+        remoteDisplay = command.execute()
 
-After('@o2_ui_search') {
-    println "Stopping browser..."
-    browser.quit()
-
-    println "Stopping remote display..."
-    remoteDisplay.waitForOrKill(1)
+        println "Starting browser..."
+        def driver
+        def file = new File( config.browsers.firefox.profile )
+        if ( file.exists() ) {
+            def profile = new FirefoxProfile( file )
+            driver = new FirefoxDriver( profile )
+        }
+        else {
+            driver = new FirefoxDriver()
+        }
+        browser = new Browser( driver: driver )
 }
 
-Before('@o2_ui_search') {
-    println "Starting remote display..."
-    def command = ["Xvfb", ":1", "-screen", "0", "1366x768x24", "-ac"]
-    remoteDisplay = command.execute()
+Given(~/^I am stopping the image search selenium server$/) {
+    ->
+        println "Stopping browser..."
+        browser.quit()
 
-    println "Starting browser..."
-    def driver
-    def file = new File( config.browsers.firefox.profile )
-    if ( file.exists() ) {
-        def profile = new FirefoxProfile( file )
-        driver = new FirefoxDriver( profile )
-    }
-    else {
-        driver = new FirefoxDriver()
-    }
-    browser = new Browser( driver: driver )
+        println "Stopping remote display..."
+        remoteDisplay.waitForOrKill(1)
 }
 
 Given(~/^that I am starting at the O2 Home page$/) { ->
