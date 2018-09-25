@@ -20,14 +20,14 @@ def imageProperties = []
 
 
 
-Given(~/^I am starting the selenium server$/) {
+Given(~/^I am starting the tlv ui selenium server$/) {
     ->
         println "Starting remote display..."
         def command = ["Xvfb", ":1", "-screen", "0", "1366x768x24", "-ac"]
         remoteDisplay = command.execute()
 }
 
-Given(~/^I am stopping the selenium server$/) {
+Given(~/^I am stopping the tlv ui selenium server$/) {
     ->
         println "Stopping browser..."
         browser.quit()

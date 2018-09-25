@@ -8,7 +8,7 @@ Feature: TLVUserInterface
 #    Then all images should be within the date range specified
 
   Scenario: Start
-    Given I am starting the selenium server
+    Given I am starting the tlv ui selenium server
 
   Scenario: TLV acquisition date search
     Given that I am starting at the TLV home page using Firefox
@@ -157,4 +157,4 @@ Feature: TLVUserInterface
     Then a table appears with the stack's metadata
 
   Scenario: Stop
-    Given I am stopping the selenium server
+    Given I am stopping the tlv ui selenium server
