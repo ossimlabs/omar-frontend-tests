@@ -11,22 +11,23 @@ this.metaClass.mixin(cucumber.api.groovy.EN)
 def config = CucumberConfig.config
 remoteDisplay = null
 
+Given(~/^I am starting the selenium server$/) {
+    ->
+        println "Starting remote display..."
+        def command = ["Xvfb", ":1", "-screen", "0", "1366x768x24", "-ac"]
+        remoteDisplay = command.execute()
 
-After('@swagger_ui') {
-    println "Stopping browser..."
-    browser.quit()
-
-    println "Stopping remote display..."
-    remoteDisplay.waitForOrKill(1)
+        println "Starting browser..."
+        browser = new Browser(driver: new FirefoxDriver())
 }
 
-Before('@swagger_ui') {
-    println "Starting remote display..."
-    def command = ["Xvfb", ":1", "-screen", "0", "1366x768x24", "-ac"]
-    remoteDisplay = command.execute()
+Given(~/^I am stopping the selenium server$/) {
+    ->
+        println "Stopping browser..."
+        browser.quit()
 
-    println "Starting browser..."
-    browser = new Browser(driver: new FirefoxDriver())
+        println "Stopping remote display..."
+        remoteDisplay.waitForOrKill(1)
 }
 
 Given(~/^that the (.*) swagger page is available for (.*)$/) { String swaggerEndpoint, String swaggerApp ->

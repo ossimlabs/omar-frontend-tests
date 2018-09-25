@@ -1,6 +1,9 @@
 @swagger_ui
 Feature: SwaggerUserInterface
 
+  Scenario: Start
+    Given I am starting the selenium server
+
   Scenario: [Swagger-01] MENSA Documentation is available
     Given that the mensa swagger page is available for mensa
     Then the mensa groundToImagePoints, imageDistance, imagePointsToGround param documentation should be present for mensa
@@ -12,7 +15,7 @@ Feature: SwaggerUserInterface
   Scenario: [Swagger-03] WMS Documentation is available
     Given that the wms swagger page is available for wms
     Then the wms getCapabilities, getMap param documentation should be present for wms
-    
+
   Scenario: [Swagger-04] WCS Documentation is available
     Given that the wcs swagger page is available for wcs
     Then the wcs getCapabilities, getCoverage, describeCoverage param documentation should be present for wcs
@@ -57,3 +60,6 @@ Feature: SwaggerUserInterface
     Examples:
       | swaggerApp | swaggerEndpoint | swaggerEndpointSubName | params   |
       | download   | archive         | archive                | download |
+
+  Scenario: Stop
+    Given I am stopping the selenium server
