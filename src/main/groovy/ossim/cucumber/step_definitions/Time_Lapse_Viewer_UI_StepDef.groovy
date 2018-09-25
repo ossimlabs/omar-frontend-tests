@@ -35,6 +35,7 @@ Given(~/^I am stopping the tlv ui selenium server$/) {
 
         println "Stopping remote display..."
         remoteDisplay.waitForOrKill(1)
+        sleep(30)
 }
 
 And(~/I add a (.*) annotation$/) {
