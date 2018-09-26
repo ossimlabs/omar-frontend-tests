@@ -26,7 +26,7 @@ Given(~/^I am starting the tlv ui selenium server$/) {
         def command = ["Xvfb", ":1", "-screen", "0", "1366x768x24", "-ac"]
         remoteDisplay = command.execute()
         println("Starting sleep")
-        sleep(3000)
+        sleep(30000)
         println("Stopping sleep")
 }
 
@@ -37,7 +37,7 @@ Given(~/^I am stopping the tlv ui selenium server$/) {
 
         println "Stopping remote display..."
         remoteDisplay.waitForOrKill(1)
-        sleep(3000)
+        sleep(30000)
 }
 
 And(~/I add a (.*) annotation$/) {
