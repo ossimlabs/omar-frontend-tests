@@ -25,7 +25,9 @@ Given(~/^I am starting the tlv ui selenium server$/) {
         println "Starting remote display..."
         def command = ["Xvfb", ":1", "-screen", "0", "1366x768x24", "-ac"]
         remoteDisplay = command.execute()
-        sleep(30)
+        println("Starting sleep")
+        sleep(60)
+        println("Stopping sleep")
 }
 
 Given(~/^I am stopping the tlv ui selenium server$/) {
