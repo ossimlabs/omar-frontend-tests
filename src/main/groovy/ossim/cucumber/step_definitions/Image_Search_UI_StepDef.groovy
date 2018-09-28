@@ -67,7 +67,7 @@ When(~/^the Map button is clicked$/) { ->
 
 When(~/^enter Melbourne in the place name$/) { ->
 //    println("enter text")
-//    sleep(5000)
+//    sleep(1000)
 //    $("input#searchInput.form-control", id: "searchInput")<< "Melbourne, Fl, United States"
 }
 
@@ -75,7 +75,7 @@ When(~/^enter Melbourne in the place name$/) { ->
 
 Then(~/^show map page centered on Melbourne$/) { ->
 //    println("show map centered on Melbourne")
-//    sleep(5000)
+//    sleep(1000)
 //    assert $("p", 0, class: "navbar-text").text()=="Filters"
 }
 
@@ -83,13 +83,13 @@ Then(~/^show map page centered on Melbourne$/) { ->
 Given(~/^on the Image Search Map page$/) { ->
 //    browser.go "http://o2.ossim.org/"
 //    println("start on map page")
-//    sleep(5000)
+//    sleep(1000)
 //    $("a", text: "Map").click()
 //    assert browser.title == "map"
 }
 When(~/^Search filter ImageID set to (.*)$/) { String imageID ->
 //    println("Click keywords pulldown")
-//    sleep(5000)
+//    sleep(1000)
 //    $("p", 2, class: "navbar-text").click()
 
 }
