@@ -25,7 +25,7 @@ Given(~/^I am starting the tlv ui selenium server$/) {
         println "Starting remote display..."
         def command = ["Xvfb", ":1", "-screen", "0", "1366x768x24", "-ac"]
         remoteDisplay = command.execute()
-        sleep(20000)
+        sleep(5000)
 }
 
 Given(~/^I am stopping the tlv ui selenium server$/) {
@@ -35,7 +35,7 @@ Given(~/^I am stopping the tlv ui selenium server$/) {
 
         println "Stopping remote display..."
         remoteDisplay.waitForOrKill(1)
-        sleep(20000)
+        sleep(5000)
 }
 
 And(~/I add a (.*) annotation$/) {
@@ -47,12 +47,12 @@ And(~/I add a (.*) annotation$/) {
         def annotationsButton = browser.page.$("body").find("a").find { it.@title == "Annotations" }
         annotationsButton.click()
 
-        sleep(1000)
+        sleep(5000)
 
         def annotationButton = browser.page.$("body").find("a").find { it.text() == annotation.capitalize() }
         annotationButton.click()
 
-        sleep(1000)
+        sleep(5000)
 
         def map = browser.page.$("#map")
         def random = new Random()
@@ -75,7 +75,7 @@ And(~/I add a (.*) annotation$/) {
                 def y2 = random.nextInt(yMax - yMin) + yMin
                 actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).click().moveByOffset(x2 - x1, y2 - y1).click().perform()
                 //actions.moveToElement(map.firstElement()).moveByOffset(x1, y1).click().moveByOffset(x2, y2).click().perform()
-                sleep(1000)
+                sleep(5000)
                 break
             case "line":
             case "polygon":
@@ -92,21 +92,21 @@ And(~/I add a (.*) annotation$/) {
                 actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).click().moveByOffset(x2 - x1, y2 - y1).click().moveByOffset(x3 - x2, y3 - y2).click().moveByOffset(x4 - x3, y4 - y3).click().moveByOffset(x5 - x4, y5 - y4).click().perform()
                 //actions.moveToElement(map.firstElement()).moveByOffset(x1, y1).click().moveByOffset(x2, y2).click().moveByOffset(x3, y3).click().perform()
                 browser.driver.executeScript("return tlv.drawAnnotationInteraction.finishDrawing();")
-                sleep(1000)
+                sleep(5000)
                 break
             case "point":
                 def x1 = random.nextInt(xMax - xMin) + xMin
                 def y1 = random.nextInt(yMax - yMin) + yMin
                 actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).click().perform()
                 //actions.moveToElement(map.firstElement()).moveByOffset(x1, y1).click().perform()
-                sleep(1000)
+                sleep(5000)
                 break
         }
 
         imageProperties.push(getCanvasData())
 
         browser.page.$("#annotationsDialog").find("button")[2].click()
-        sleep(1000)
+        sleep(5000)
 }
 
 And(~/I adjust the (.*) of a layer$/) {
@@ -176,7 +176,7 @@ And(~/I click the Summary Table button$/) { ->
     //def summaryTableButton = browser.page.$("div", class: "summary-table-control")
     //summaryTableButton.click()
 
-    sleep(1000)
+    sleep(5000)
 }
 
 Given(~/^that I am starting at the TLV home page using (.*)$/) {
@@ -238,7 +238,7 @@ Then(~/I can use the arrow keys to cycle through the stack$/) { ->
         assert browser.page.$("#tlvLayerCountSpan").text() == "${it}/${layers}"
         browser.page.$("body") << Keys.ARROW_RIGHT
 
-        sleep(1000)
+        sleep(5000)
     }
 
     (1..layers).reverse().each {
@@ -252,7 +252,7 @@ Then(~/I can use the arrow keys to cycle through the stack$/) { ->
 
         assert browser.page.$("#tlvLayerCountSpan").text() == "${it}/${layers}"
 
-        sleep(1000)
+        sleep(5000)
     }
 }
 
@@ -262,7 +262,7 @@ Then(~/I can use the delete key to remove an image from the stack$/) { ->
     browser.page.$("body") << Keys.DELETE
     def layersAfterDelete = browser.driver.executeScript("return tlv.layers.length;") as Integer
 
-    sleep(1000)
+    sleep(5000)
 
     assert layersBeforeDelete == layersAfterDelete + 1
     assert browser.page.$("#tlvLayerCountSpan").text() == "1/${layersBeforeDelete - 1}"
@@ -284,7 +284,7 @@ Then(~/I can use the mouse to pan and zoom on the imagery$/) { ->
 //    pan.perform()
 
 
-    sleep(1000)
+    sleep(5000)
     println browser.driver.executeScript("return tlv.map.getView().calculateExtent( tlv.map.getSize() );")
 }
 
@@ -360,7 +360,7 @@ When(~/I search for imagery near (.*)$/) {
 
         browser.page.$("#searchLocationInput").value(location)
         browser.page.$("#searchStartDateTimePicker").children()[0].value("01/01/2000 00:00:00")
-        sleep(1000)
+        sleep(5000)
 
         browser.page.$("#searchDialog").find(".modal-footer").find(".btn-primary")[0].click()
 

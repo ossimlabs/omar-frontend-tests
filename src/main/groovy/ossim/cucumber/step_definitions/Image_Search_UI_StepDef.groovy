@@ -30,6 +30,7 @@ Given(~/^I am starting the image search selenium server$/) {
             driver = new FirefoxDriver()
         }
         browser = new Browser( driver: driver )
+        sleep(5000)
 }
 
 Given(~/^I am stopping the image search selenium server$/) {
@@ -39,6 +40,7 @@ Given(~/^I am stopping the image search selenium server$/) {
 
         println "Stopping remote display..."
         remoteDisplay.waitForOrKill(1)
+        sleep(5000)
 }
 
 Given(~/^that I am starting at the O2 Home page$/) { ->
@@ -49,7 +51,7 @@ Given(~/^that I am starting at the O2 Home page$/) { ->
 
 Then(~/^the Search page is loaded$/) { ->
     // give time for the page to load
-    sleep(2000)
+    sleep(5000)
     def canvas = browser.page.$("canvas")
     assert canvas.height > 0
     assert canvas.width > 0
