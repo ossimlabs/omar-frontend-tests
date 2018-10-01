@@ -32,6 +32,7 @@ Given(~/^I am stopping the tlv ui selenium server$/) {
     ->
         println "Stopping browser..."
         browser.quit()
+        sleep(1000)
 
         println "Stopping remote display..."
         remoteDisplay.waitForOrKill(1)
@@ -344,6 +345,8 @@ Then(~/^the search dialog will show a Start Date of (.*), an End Date of (.*), a
 
         def maxResultsValue = browser.page.$("#searchMaxResultsSelect").value()
         assert maxResultsValue == maxResults
+
+        println("Search dialogs verified")
 }
 
 When(~/(.*) are supplied in the TLV URL$/) {
