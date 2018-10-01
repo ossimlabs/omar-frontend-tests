@@ -19,6 +19,8 @@ Given(~/^I am starting the image search selenium server$/) {
         def command = ["Xvfb", ":1", "-screen", "0", "1366x768x24", "-ac"]
         remoteDisplay = command.execute()
 
+        sleep(5000)
+
         println "Starting browser..."
         def driver
         def file = new File( config.browsers.firefox.profile )

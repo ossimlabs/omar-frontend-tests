@@ -375,7 +375,6 @@ When(~/I search for imagery near (.*)$/) {
 
             layers = browser.driver.executeScript("return tlv.layers ? tlv.layers.length : 0;") as Integer
             println "tlv.layers: ${ layers }"
-            println browser.driver.executeScript("return tlv.searchFunction;")
             if (layers > 0)
             {
                 timer = 0
