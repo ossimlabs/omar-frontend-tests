@@ -32,7 +32,7 @@ Given(~/^I am stopping the tlv ui selenium server$/) {
     ->
         println "Stopping browser..."
         browser.quit()
-        sleep(1000)
+        sleep(15000)
 
         println "Stopping remote display..."
         remoteDisplay.waitForOrKill(1)
