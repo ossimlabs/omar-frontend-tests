@@ -17,7 +17,7 @@ this.metaClass.mixin(cucumber.api.groovy.EN)
 def config = CucumberConfig.config
 def homePageUrl = config.tlvUrl
 def imageProperties = []
-
+boolean browserCreated = false
 
 
 Given(~/^I am starting the tlv ui selenium server$/) {
@@ -182,6 +182,10 @@ And(~/I click the Summary Table button$/) { ->
 
 Given(~/^that I am starting at the TLV home page using (.*)$/) {
     String browserType ->
+        if (browserCreated){
+            println("Stopping browser...")
+            browser.quit()
+        }
         println "Using ${browserType}"
         switch (browserType)
         {
@@ -200,6 +204,7 @@ Given(~/^that I am starting at the TLV home page using (.*)$/) {
                 break
         }
 
+        browserCreated = true
         browser.go(homePageUrl)
         def pageTitle = browser.getTitle()
 
