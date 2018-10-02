@@ -382,7 +382,7 @@ When(~/I search for imagery near (.*)$/) {
         println "Searching for imagery near ${location}..."
 
         browser.page.$("#searchLocationInput").value(location)
-        println(browser.page.$("#searchLocationInput").value())
+        sleep(1000)
         browser.page.$("#searchStartDateTimePicker").children()[0].value("01/01/2000 00:00:00")
         sleep(2000)
 
