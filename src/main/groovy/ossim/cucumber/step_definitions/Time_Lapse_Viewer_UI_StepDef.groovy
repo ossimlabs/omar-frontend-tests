@@ -76,7 +76,6 @@ And(~/I add a (.*) annotation$/) {
                 def y2 = random.nextInt(yMax - yMin) + yMin
                 actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).click().moveByOffset(x2 - x1, y2 - y1).click().perform()
                 //actions.moveToElement(map.firstElement()).moveByOffset(x1, y1).click().moveByOffset(x2, y2).click().perform()
-                browser.driver.executeScript("return tlv.drawAnnotationInteraction.finishDrawing();")
                 sleep(1000)
                 break
             case "line":
