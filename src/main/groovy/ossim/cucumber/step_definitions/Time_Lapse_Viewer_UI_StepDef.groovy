@@ -48,7 +48,6 @@ Given(~/^I am creating the tlv browsers$/) {
             driver = new FirefoxDriver()
         }
         firefoxBrowser = new Browser( driver: driver )
-        break
 }
 
 Given(~/^I am stopping the tlv ui selenium server$/) {
