@@ -15,11 +15,11 @@ remoteDisplay = null
 
 Given(~/^I am starting the image search selenium server$/) {
     ->
-        println "Starting remote display..."
-        def command = ["Xvfb", ":1", "-screen", "0", "1366x768x24", "-ac"]
-        remoteDisplay = command.execute()
+        // println "Starting remote display..."
+        // def command = ["Xvfb", ":1", "-screen", "0", "1366x768x24", "-ac"]
+        // remoteDisplay = command.execute()
 
-        sleep(5000)
+        // sleep(5000)
 
         println "Starting browser..."
         def driver

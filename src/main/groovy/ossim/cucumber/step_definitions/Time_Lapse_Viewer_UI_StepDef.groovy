@@ -19,6 +19,9 @@ def homePageUrl = config.tlvUrl
 def imageProperties = []
 boolean browserCreated = false
 
+def firefoxBrowser
+def chromeBrowser
+
 
 Given(~/^I am starting the tlv ui selenium server$/) {
     ->
@@ -28,15 +31,37 @@ Given(~/^I am starting the tlv ui selenium server$/) {
         sleep(5000)
 }
 
+Given(~/^I am creating the tlv browsers$/) {
+    ->
+        
+        // Create chromeBrowser
+        // chromeBrowser = new Browser(driver: new ChromeDriver()); break;
+        
+        // Create firefoxBrowser
+        def driver
+        def file = new File( config.browsers.firefox.profile )
+        if ( file.exists() ) {
+            def profile = new FirefoxProfile( file )
+            driver = new FirefoxDriver( profile )
+        }
+        else {
+            driver = new FirefoxDriver()
+        }
+        firefoxBrowser = new Browser( driver: driver )
+        break
+}
+
 Given(~/^I am stopping the tlv ui selenium server$/) {
     ->
-        println "Stopping browser..."
-        browser.quit()
-        sleep(15000)
-
         println "Stopping remote display..."
         remoteDisplay.waitForOrKill(1)
         sleep(5000)
+}
+
+Given(~/^I am closing the tlv browsers$/) {
+    ->
+        println "Stopping firefox browser..."
+        firefoxBrowser.quit()
 }
 
 And(~/I add a (.*) annotation$/) {
@@ -184,29 +209,18 @@ And(~/I click the Summary Table button$/) { ->
 
 Given(~/^that I am starting at the TLV home page using (.*)$/) {
     String browserType ->
-        if (browserCreated){
-            println("Stopping browser...")
-            browser.quit()
-        }
         println "Using ${browserType}"
+
         switch (browserType)
         {
-            case "Chrome": browser = new Browser(driver: new ChromeDriver()); break;
+            case "Chrome":
+                browser = chromeBrowser
+                break
             case "Firefox":
-                def driver
-                def file = new File( config.browsers.firefox.profile )
-                if ( file.exists() ) {
-                    def profile = new FirefoxProfile( file )
-                    driver = new FirefoxDriver( profile )
-                }
-                else {
-                    driver = new FirefoxDriver()
-                }
-                browser = new Browser( driver: driver )
+                browser = firefoxBrowser
                 break
         }
-
-        browserCreated = true
+        
         browser.go(homePageUrl)
         def pageTitle = browser.getTitle()
 
