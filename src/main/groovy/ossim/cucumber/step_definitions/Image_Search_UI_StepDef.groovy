@@ -37,7 +37,7 @@ Given(~/^I am stopping the image search selenium server$/) {
         println "Stopping remote display..."
         remoteDisplay.waitForOrKill(1)
         sleep(5000)
-        command = ["ffmpeg", "-i", "${config.videoPrefix}high_quality_video.flv", "${config.videoPrefix}low_quality_video.mp4"]
+        command = ["ffmpeg", "-i", "${videoPrefix}high_quality_video.flv", "${videoPrefix}low_quality_video.mp4"]
         conversionProcess = command.execute()
         conversionProcess.waitFor()
 }
