@@ -94,9 +94,9 @@ And(~/I add a (.*) annotation$/) {
         def random = new Random()
         def startX = map.width / 2 as Integer
         def startY = map.height / 2 as Integer
-        def xMax = map.width
+        def xMax = map.width - 50
         def xMin = 50
-        def yMax = map.height
+        def yMax = map.height - 50
         def yMin = 150
 
         def actions = new Actions(browser.driver)
