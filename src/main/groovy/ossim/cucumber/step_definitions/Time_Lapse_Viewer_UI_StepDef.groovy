@@ -393,9 +393,9 @@ When(~/I search for imagery near (.*)$/) {
 
         println "Searching for imagery near ${location}..."
 
-        browser.page.$("#searchLocationInput").value(location)
-        sleep(1000)
         browser.page.$("#searchStartDateTimePicker").children()[0].value("01/01/2000 00:00:00")
+        sleep(1000)
+        browser.page.$("#searchLocationInput").value(location)
         sleep(2000)
 
         browser.page.$("#searchDialog").find(".modal-footer").find(".btn-primary")[0].click()
@@ -420,7 +420,6 @@ When(~/I search for imagery near (.*)$/) {
                 if ( timer == 0 ) { println "Search timed out..." }
             }
         }
-
 
         assert layers > 0
 }
