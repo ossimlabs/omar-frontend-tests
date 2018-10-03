@@ -110,7 +110,9 @@ And(~/I add a (.*) annotation$/) {
                 sleep(500)
                 actions.click().perform()
                 sleep(500)
-                actions.moveByOffset(x2 - x1, y2 - y1).click().perform()
+                actions.moveByOffset(x2 - x1, y2 - y1).perform()
+                sleep(500)
+                actions.click().perform()
                 //actions.moveToElement(map.firstElement()).moveByOffset(x1, y1).click().moveByOffset(x2, y2).click().perform()
                 sleep(1000)
                 break
