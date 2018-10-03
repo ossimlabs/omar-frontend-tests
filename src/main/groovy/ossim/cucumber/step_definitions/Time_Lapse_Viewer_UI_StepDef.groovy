@@ -34,7 +34,7 @@ Given(~/^I am starting the tlv ui selenium server$/) {
         command.execute()
         sleep(3000)
         println "Starting video recording..."
-        command = ["flvrec.py", "localhost", "-o", "video.flv"]
+        command = ["flvrec.py", "-o", "video.flv", "localhost", "5900"]
         command.execute()
         sleep(5000)
 }
