@@ -15,12 +15,6 @@ remoteDisplay = null
 
 Given(~/^I am starting the image search selenium server$/) {
     ->
-        // println "Starting remote display..."
-        // def command = ["Xvfb", ":1", "-screen", "0", "1366x768x24", "-ac"]
-        // remoteDisplay = command.execute()
-
-        // sleep(5000)
-
         println "Starting browser..."
         def driver
         def file = new File( config.browsers.firefox.profile )
@@ -43,7 +37,7 @@ Given(~/^I am stopping the image search selenium server$/) {
         println "Stopping remote display..."
         remoteDisplay.waitForOrKill(1)
         sleep(5000)
-        command = ["ffmpeg", "-i", "high_quality_video.flv", "low_quality_video.mp4"]
+        command = ["ffmpeg", "-i", "${config.videoPrefix}high_quality_video.flv", "${config.videoPrefix}low_quality_video.mp4"]
         conversionProcess = command.execute()
         conversionProcess.waitFor()
 
