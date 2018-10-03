@@ -106,8 +106,10 @@ And(~/I add a (.*) annotation$/) {
                 def y1 = random.nextInt(yMax - yMin) + yMin
                 def x2 = random.nextInt(xMax - xMin) + xMin
                 def y2 = random.nextInt(yMax - yMin) + yMin
-                actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).click().perform()
-                sleep(1000)
+                actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).perforn()
+                sleep(500)
+                actions.click().perform()
+                sleep(500)
                 actions.moveByOffset(x2 - x1, y2 - y1).click().perform()
                 //actions.moveToElement(map.firstElement()).moveByOffset(x1, y1).click().moveByOffset(x2, y2).click().perform()
                 sleep(1000)
