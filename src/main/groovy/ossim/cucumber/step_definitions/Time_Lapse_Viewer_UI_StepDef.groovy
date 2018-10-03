@@ -28,6 +28,14 @@ Given(~/^I am starting the tlv ui selenium server$/) {
         println "Starting remote display..."
         def command = ["Xvfb", ":1", "-screen", "0", "1366x768x24", "-ac"]
         remoteDisplay = command.execute()
+        sleep(3000)
+        println "Starting VNC server..."
+        def command = ["x11vnc", "-display", ":1", "-localhost"]
+        remoteDisplay = command.execute()
+        sleep(3000)
+        println "Starting video recording..."
+        def command = ["flvrec.py", "localhost", "-o", "video.flv"]
+        remoteDisplay = command.execute()
         sleep(5000)
 }
 
