@@ -21,6 +21,7 @@ boolean browserCreated = false
 
 def firefoxBrowser
 def chromeBrowser
+buildNumber = System.getenv("BUILD_NUMBER")
 
 
 Given(~/^I am starting the tlv ui selenium server$/) {
@@ -37,6 +38,7 @@ Given(~/^I am starting the tlv ui selenium server$/) {
         command = ["flvrec.py", "-o", "high_quality_video.flv", "localhost", "5900"]
         command.execute()
         sleep(5000)
+        println("Build number is ${buildNumber}")
 }
 
 Given(~/^I am creating the tlv browsers$/) {
