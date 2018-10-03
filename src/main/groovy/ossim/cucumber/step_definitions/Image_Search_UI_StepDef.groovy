@@ -40,8 +40,6 @@ Given(~/^I am stopping the image search selenium server$/) {
         command = ["ffmpeg", "-i", "${config.videoPrefix}high_quality_video.flv", "${config.videoPrefix}low_quality_video.mp4"]
         conversionProcess = command.execute()
         conversionProcess.waitFor()
-
-        println("Build number is ${buildNumber}")
 }
 
 Given(~/^that I am starting at the O2 Home page$/) { ->
