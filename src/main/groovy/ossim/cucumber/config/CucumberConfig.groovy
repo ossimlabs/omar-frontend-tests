@@ -3,6 +3,8 @@ package ossim.cucumber.config
 class CucumberConfig
 {
     static def config
+    static def buildNumber
+    static def videoPrefix
 
     static def getConfig()
     {
@@ -52,6 +54,8 @@ class CucumberConfig
         {
             def slurper = new ConfigSlurper()
             config = slurper.parse(resourceFile)
+            buildNumber = System.getenv("BUILD_NUMBER")
+            videoPrefix = buildNumber != null ? "${buildNumber}_" : ""
         }
     }
 }
