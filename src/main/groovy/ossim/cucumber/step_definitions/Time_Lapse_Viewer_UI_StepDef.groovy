@@ -28,10 +28,6 @@ videoPrefix = buildNumber != null ? "${buildNumber}_" : ""
 
 Given(~/^I am starting the tlv ui selenium server$/) {
     ->
-
-        println "videoPrefix is ${videoPrefix}"
-        println "buildNumber is ${buildNumber}"
-
         println "Starting remote display..."
         def command = ["Xvfb", ":1", "-screen", "0", "1366x768x24", "-ac"]
         remoteDisplay = command.execute()
