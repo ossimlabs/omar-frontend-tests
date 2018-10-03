@@ -25,6 +25,10 @@ def chromeBrowser
 
 Given(~/^I am starting the tlv ui selenium server$/) {
     ->
+
+        println "videoPrefix is ${config.videoPrefix}"
+        println "buildNumber is ${config.buildNumber}"
+
         println "Starting remote display..."
         def command = ["Xvfb", ":1", "-screen", "0", "1366x768x24", "-ac"]
         remoteDisplay = command.execute()
@@ -38,7 +42,6 @@ Given(~/^I am starting the tlv ui selenium server$/) {
         command.execute()
         sleep(5000)
 
-        println "videoPrefix is ${config.videoPrefix}"
 }
 
 Given(~/^I am creating the tlv browsers$/) {
