@@ -43,6 +43,9 @@ Given(~/^I am stopping the image search selenium server$/) {
         println "Stopping remote display..."
         remoteDisplay.waitForOrKill(1)
         sleep(5000)
+        command = ["ffmpeg", "-i", "high_quality_video.flv", "low_quality_video.mp4"]
+        conversionProcess = command.execute()
+        conversionProcess.waitFor()
 }
 
 Given(~/^that I am starting at the O2 Home page$/) { ->
