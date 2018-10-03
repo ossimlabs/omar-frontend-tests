@@ -23,4 +23,4 @@ avroUrl = "${rbtcloudRootDir}/omar-avro"
 downloadUrl = "${rbtcloudRootDir}/omar-download"
 
 buildNumber = System.getenv("BUILD_NUMBER")
-videoPrefix = buildNumber != null ? (buildNumber + "_") : ""
+videoPrefix = buildNumber != null ? "${buildNumber}_" : ""
