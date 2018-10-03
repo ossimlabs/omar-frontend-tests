@@ -30,12 +30,12 @@ Given(~/^I am starting the tlv ui selenium server$/) {
         remoteDisplay = command.execute()
         sleep(3000)
         println "Starting VNC server..."
-        def command = ["x11vnc", "-display", ":1", "-localhost"]
-        remoteDisplay = command.execute()
+        command = ["x11vnc", "-display", ":1", "-localhost"]
+        command.execute()
         sleep(3000)
         println "Starting video recording..."
-        def command = ["flvrec.py", "localhost", "-o", "video.flv"]
-        remoteDisplay = command.execute()
+        command = ["flvrec.py", "localhost", "-o", "video.flv"]
+        command.execute()
         sleep(5000)
 }
 
