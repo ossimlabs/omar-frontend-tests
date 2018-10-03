@@ -134,7 +134,9 @@ And(~/I add a (.*) annotation$/) {
             case "point":
                 def x1 = random.nextInt(xMax - xMin) + xMin
                 def y1 = random.nextInt(yMax - yMin) + yMin
-                actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).click().perform()
+                actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).perform()
+                sleep(500)
+                actions.click().perform()
                 //actions.moveToElement(map.firstElement()).moveByOffset(x1, y1).click().perform()
                 sleep(1000)
                 break
