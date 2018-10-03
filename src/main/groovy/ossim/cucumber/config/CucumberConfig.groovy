@@ -54,8 +54,6 @@ class CucumberConfig
         {
             def slurper = new ConfigSlurper()
             config = slurper.parse(resourceFile)
-            buildNumber = System.getenv("BUILD_NUMBER")
-            videoPrefix = buildNumber != null ? "${buildNumber}_" : ""
         }
     }
 }
