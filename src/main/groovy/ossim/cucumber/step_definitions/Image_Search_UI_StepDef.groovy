@@ -26,17 +26,18 @@ Given(~/^I am starting the image search selenium server$/) {
             driver = new FirefoxDriver()
         }
         browser = new Browser( driver: driver )
-        sleep(5000)
+        sleep(3000)
 }
 
 Given(~/^I am stopping the image search selenium server$/) {
     ->
         println "Stopping browser..."
         browser.quit()
+        sleep(1000)
 
         println "Stopping remote display..."
         remoteDisplay.waitForOrKill(1)
-        sleep(5000)
+        sleep(3000)
         command = ["ffmpeg", "-i", "${videoPrefix}high_quality_video.flv", "${videoPrefix}low_quality_video.mp4"]
         conversionProcess = command.execute()
         conversionProcess.waitFor()
@@ -50,7 +51,7 @@ Given(~/^that I am starting at the O2 Home page$/) { ->
 
 Then(~/^the Search page is loaded$/) { ->
     // give time for the page to load
-    sleep(5000)
+    sleep(3000)
     def canvas = browser.page.$("canvas")
     assert canvas.height > 0
     assert canvas.width > 0

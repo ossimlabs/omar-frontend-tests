@@ -21,4 +21,3 @@ omsUrl = "${rbtcloudRootDir}/omar-oms"
 stagerUrl = "${rbtcloudRootDir}/omar-stager"
 avroUrl = "${rbtcloudRootDir}/omar-avro"
 downloadUrl = "${rbtcloudRootDir}/omar-download"
-

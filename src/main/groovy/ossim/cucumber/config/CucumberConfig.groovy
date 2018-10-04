@@ -3,8 +3,6 @@ package ossim.cucumber.config
 class CucumberConfig
 {
     static def config
-    static def buildNumber
-    static def videoPrefix
 
     static def getConfig()
     {

@@ -39,7 +39,7 @@ Given(~/^I am starting the tlv ui selenium server$/) {
         println "Starting video recording..."
         command = ["flvrec.py", "-o", "${videoPrefix}high_quality_video.flv", "localhost", "5900"]
         command.execute()
-        sleep(5000)
+        sleep(3000)
 }
 
 Given(~/^I am creating the tlv browsers$/) {
@@ -65,7 +65,7 @@ Given(~/^I am stopping the tlv ui selenium server$/) {
     ->
         println "Stopping remote display..."
         remoteDisplay.waitForOrKill(1)
-        sleep(5000)
+        sleep(3000)
 }
 
 Given(~/^I am closing the tlv browsers$/) {
