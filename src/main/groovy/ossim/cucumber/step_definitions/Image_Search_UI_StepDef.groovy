@@ -15,10 +15,6 @@ remoteDisplay = null
 
 Given(~/^I am starting the image search selenium server$/) {
     ->
-        println "Starting remote display..."
-        def command = ["Xvfb", ":1", "-screen", "0", "1366x768x24", "-ac"]
-        remoteDisplay = command.execute()
-
         println "Starting browser..."
         def driver
         def file = new File( config.browsers.firefox.profile )
@@ -30,15 +26,21 @@ Given(~/^I am starting the image search selenium server$/) {
             driver = new FirefoxDriver()
         }
         browser = new Browser( driver: driver )
+        sleep(3000)
 }
 
 Given(~/^I am stopping the image search selenium server$/) {
     ->
         println "Stopping browser..."
         browser.quit()
+        sleep(1000)
 
         println "Stopping remote display..."
         remoteDisplay.waitForOrKill(1)
+        sleep(3000)
+        command = ["ffmpeg", "-i", "${videoPrefix}high_quality_video.flv", "${videoPrefix}low_quality_video.mp4"]
+        conversionProcess = command.execute()
+        conversionProcess.waitFor()
 }
 
 Given(~/^that I am starting at the O2 Home page$/) { ->
@@ -49,7 +51,7 @@ Given(~/^that I am starting at the O2 Home page$/) { ->
 
 Then(~/^the Search page is loaded$/) { ->
     // give time for the page to load
-    sleep(2000)
+    sleep(3000)
     def canvas = browser.page.$("canvas")
     assert canvas.height > 0
     assert canvas.width > 0
@@ -65,7 +67,7 @@ When(~/^the Map button is clicked$/) { ->
 
 When(~/^enter Melbourne in the place name$/) { ->
 //    println("enter text")
-//    sleep(5000)
+//    sleep(1000)
 //    $("input#searchInput.form-control", id: "searchInput")<< "Melbourne, Fl, United States"
 }
 
@@ -73,7 +75,7 @@ When(~/^enter Melbourne in the place name$/) { ->
 
 Then(~/^show map page centered on Melbourne$/) { ->
 //    println("show map centered on Melbourne")
-//    sleep(5000)
+//    sleep(1000)
 //    assert $("p", 0, class: "navbar-text").text()=="Filters"
 }
 
@@ -81,13 +83,13 @@ Then(~/^show map page centered on Melbourne$/) { ->
 Given(~/^on the Image Search Map page$/) { ->
 //    browser.go "http://o2.ossim.org/"
 //    println("start on map page")
-//    sleep(5000)
+//    sleep(1000)
 //    $("a", text: "Map").click()
 //    assert browser.title == "map"
 }
 When(~/^Search filter ImageID set to (.*)$/) { String imageID ->
 //    println("Click keywords pulldown")
-//    sleep(5000)
+//    sleep(1000)
 //    $("p", 2, class: "navbar-text").click()
 
 }

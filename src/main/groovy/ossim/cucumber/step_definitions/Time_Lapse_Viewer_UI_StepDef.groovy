@@ -17,7 +17,13 @@ this.metaClass.mixin(cucumber.api.groovy.EN)
 def config = CucumberConfig.config
 def homePageUrl = config.tlvUrl
 def imageProperties = []
+boolean browserCreated = false
 
+def firefoxBrowser
+def chromeBrowser
+
+buildNumber = System.getenv("BUILD_NUMBER")
+videoPrefix = buildNumber != null ? "${buildNumber}_" : ""
 
 
 Given(~/^I am starting the tlv ui selenium server$/) {
@@ -25,15 +31,47 @@ Given(~/^I am starting the tlv ui selenium server$/) {
         println "Starting remote display..."
         def command = ["Xvfb", ":1", "-screen", "0", "1366x768x24", "-ac"]
         remoteDisplay = command.execute()
+        sleep(3000)
+        println "Starting VNC server..."
+        command = ["x11vnc", "-display", ":1", "-localhost", "-shared", "-forever"]
+        command.execute()
+        sleep(3000)
+        println "Starting video recording..."
+        command = ["flvrec.py", "-o", "${videoPrefix}high_quality_video.flv", "localhost", "5900"]
+        command.execute()
+        sleep(3000)
+}
+
+Given(~/^I am creating the tlv browsers$/) {
+    ->
+        
+        // Create chromeBrowser
+        // chromeBrowser = new Browser(driver: new ChromeDriver()); break;
+        
+        // Create firefoxBrowser
+        def driver
+        def file = new File( config.browsers.firefox.profile )
+        if ( file.exists() ) {
+            def profile = new FirefoxProfile( file )
+            driver = new FirefoxDriver( profile )
+        }
+        else {
+            driver = new FirefoxDriver()
+        }
+        firefoxBrowser = new Browser( driver: driver )
 }
 
 Given(~/^I am stopping the tlv ui selenium server$/) {
     ->
-        println "Stopping browser..."
-        browser.quit()
-
         println "Stopping remote display..."
         remoteDisplay.waitForOrKill(1)
+        sleep(3000)
+}
+
+Given(~/^I am closing the tlv browsers$/) {
+    ->
+        println "Stopping firefox browser..."
+        firefoxBrowser.quit()
 }
 
 And(~/I add a (.*) annotation$/) {
@@ -56,9 +94,9 @@ And(~/I add a (.*) annotation$/) {
         def random = new Random()
         def startX = map.width / 2 as Integer
         def startY = map.height / 2 as Integer
-        def xMax = map.width
+        def xMax = map.width - 50
         def xMin = 50
-        def yMax = map.height
+        def yMax = map.height - 50
         def yMin = 150
 
         def actions = new Actions(browser.driver)
@@ -71,7 +109,13 @@ And(~/I add a (.*) annotation$/) {
                 def y1 = random.nextInt(yMax - yMin) + yMin
                 def x2 = random.nextInt(xMax - xMin) + xMin
                 def y2 = random.nextInt(yMax - yMin) + yMin
-                actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).click().moveByOffset(x2 - x1, y2 - y1).click().perform()
+                actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).perform()
+                sleep(500)
+                actions.click().perform()
+                sleep(500)
+                actions.moveByOffset(x2 - x1, y2 - y1).perform()
+                sleep(500)
+                actions.click().perform()
                 //actions.moveToElement(map.firstElement()).moveByOffset(x1, y1).click().moveByOffset(x2, y2).click().perform()
                 sleep(1000)
                 break
@@ -95,7 +139,9 @@ And(~/I add a (.*) annotation$/) {
             case "point":
                 def x1 = random.nextInt(xMax - xMin) + xMin
                 def y1 = random.nextInt(yMax - yMin) + yMin
-                actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).click().perform()
+                actions.moveToElement(map.firstElement()).moveByOffset(-startX, -startY).moveByOffset(x1, y1).perform()
+                sleep(500)
+                actions.click().perform()
                 //actions.moveToElement(map.firstElement()).moveByOffset(x1, y1).click().perform()
                 sleep(1000)
                 break
@@ -180,23 +226,17 @@ And(~/I click the Summary Table button$/) { ->
 Given(~/^that I am starting at the TLV home page using (.*)$/) {
     String browserType ->
         println "Using ${browserType}"
+
         switch (browserType)
         {
-            case "Chrome": browser = new Browser(driver: new ChromeDriver()); break;
+            case "Chrome":
+                browser = chromeBrowser
+                break
             case "Firefox":
-                def driver
-                def file = new File( config.browsers.firefox.profile )
-                if ( file.exists() ) {
-                    def profile = new FirefoxProfile( file )
-                    driver = new FirefoxDriver( profile )
-                }
-                else {
-                    driver = new FirefoxDriver()
-                }
-                browser = new Browser( driver: driver )
+                browser = firefoxBrowser
                 break
         }
-
+        
         browser.go(homePageUrl)
         def pageTitle = browser.getTitle()
 
@@ -342,6 +382,8 @@ Then(~/^the search dialog will show a Start Date of (.*), an End Date of (.*), a
 
         def maxResultsValue = browser.page.$("#searchMaxResultsSelect").value()
         assert maxResultsValue == maxResults
+
+        println("Search dialogs verified")
 }
 
 When(~/(.*) are supplied in the TLV URL$/) {
@@ -356,9 +398,10 @@ When(~/I search for imagery near (.*)$/) {
 
         println "Searching for imagery near ${location}..."
 
-        browser.page.$("#searchLocationInput").value(location)
         browser.page.$("#searchStartDateTimePicker").children()[0].value("01/01/2000 00:00:00")
         sleep(1000)
+        browser.page.$("#searchLocationInput").value(location)
+        sleep(2000)
 
         browser.page.$("#searchDialog").find(".modal-footer").find(".btn-primary")[0].click()
 
@@ -378,12 +421,10 @@ When(~/I search for imagery near (.*)$/) {
             }
             else
             {
-                println browser.driver.executeScript("return tlv.searchFunction;")
                 timer -= 1
                 if ( timer == 0 ) { println "Search timed out..." }
             }
         }
-
 
         assert layers > 0
 }
