@@ -159,5 +159,5 @@ Feature: TLVUserInterface
     And I click the Summary Table button
     Then a table appears with the stack's metadata
 
-  Scenario: Remove browsers
-    Given I am closing the tlv browsers
+#  Scenario: Remove browsers
+#    Given I am closing the tlv browsers
