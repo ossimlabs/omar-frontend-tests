@@ -80,7 +80,6 @@ And(~/I add a (.*) annotation$/) {
         println "Adding ${annotation} annotation..."
 
         browser.driver.executeScript("return displayNavbar();")
-        sleep(500)
         def annotationsButton = browser.page.$("body").find("a").find { it.@title == "Annotations" }
         annotationsButton.click()
 
