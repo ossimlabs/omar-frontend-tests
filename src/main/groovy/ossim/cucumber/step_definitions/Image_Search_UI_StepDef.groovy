@@ -15,20 +15,18 @@ remoteDisplay = null
 
 Given(~/^I am starting the image search selenium server$/) {
     ->
-//        println "Starting browser..."
-//        def driver
-//        def file = new File( config.browsers.firefox.profile )
-//        if ( file.exists() ) {
-//            def profile = new FirefoxProfile( file )
-//            driver = new FirefoxDriver( profile )
-//        }
-//        else {
-//            driver = new FirefoxDriver()
-//        }
-//        browser = new Browser( driver: driver )
-//        sleep(3000)
-        browser = firefoxBrowser
-        sleep(2000)
+        println "Starting browser..."
+        def driver
+        def file = new File( config.browsers.firefox.profile )
+        if ( file.exists() ) {
+            def profile = new FirefoxProfile( file )
+            driver = new FirefoxDriver( profile )
+        }
+        else {
+            driver = new FirefoxDriver()
+        }
+        browser = new Browser( driver: driver )
+        sleep(3000)
 }
 
 Given(~/^I am stopping the image search selenium server$/) {
