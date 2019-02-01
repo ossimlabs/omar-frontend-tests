@@ -71,7 +71,7 @@ dependencies {
     testCompile "info.cukes:cucumber-junit:1.2.2"
     testCompile 'junit:junit:4.11'
 
-    runtime "org.seleniumhq.selenium:selenium-htmlunit-driver:3.14.0"
+    runtime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.52.0"
     runtime "net.sourceforge.htmlunit:htmlunit:2.18"
     compile 'info.cukes:cucumber-groovy:1.2.2'
     compile "com.amazonaws:aws-java-sdk-sqs:1.11.26"
