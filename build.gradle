@@ -77,9 +77,9 @@ dependencies {
     compile "com.amazonaws:aws-java-sdk-sqs:1.11.26"
 
     compile "org.gebish:geb-core:1.0"
-    compile "org.seleniumhq.selenium:selenium-chrome-driver:3.0.0"
-    compile "org.seleniumhq.selenium:selenium-firefox-driver:3.0.0"
-    compile "org.seleniumhq.selenium:selenium-support:3.0.0"
+    compile "org.seleniumhq.selenium:selenium-chrome-driver:2.53.1"
+    compile "org.seleniumhq.selenium:selenium-firefox-driver:2.53.1"
+    compile "org.seleniumhq.selenium:selenium-support:2.53.1"
 
     compile "commons-io:commons-io:2.5"
     compile "javax.media:jai_core:1.1.3"
