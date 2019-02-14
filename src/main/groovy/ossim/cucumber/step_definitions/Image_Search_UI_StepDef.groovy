@@ -52,6 +52,8 @@ Given(~/^that I am starting at the O2 Home page$/) { ->
 Then(~/^the Search page is loaded$/) { ->
     // give time for the page to load
     sleep(3000)
+    browser.page.$("a", text: "Map").click()
+    sleep(1000)
     def canvas = browser.page.$("canvas")
     assert canvas.height > 0
     assert canvas.width > 0
