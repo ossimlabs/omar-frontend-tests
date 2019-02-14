@@ -333,7 +333,7 @@ Then(~/I get images that contain (.*)$/) {
         def layers = browser.driver.executeScript("return tlv.layers ? tlv.layers.length : 0;") as Integer
         (1..layers).each {
             def geometry = JsonOutput.toJson(browser.driver.executeScript("return tlv.layers[ ${it - 1} ].metadata.footprint"))
-            def extent = browser.driver.executeScript("return new ol.format.GeoJSON().readGeometry( ${geometry} ).getExtent()")
+            def extent = browser.driver.executeScript("return new ol.format.WKT().readGeometry( ${geometry} ).getExtent()")
 
 
             assert browser.driver.executeScript("return ol.extent.containsCoordinate( ${extent}, ${coordinate} )") == true
