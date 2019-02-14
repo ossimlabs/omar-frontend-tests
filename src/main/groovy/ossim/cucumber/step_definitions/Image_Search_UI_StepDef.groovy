@@ -44,7 +44,7 @@ Given(~/^I am stopping the image search selenium server$/) {
 }
 
 Given(~/^that I am starting at the O2 Home page$/) { ->
-    browser.go(homePageUrl + "/omar-ui/omar?mapVisibility=true")
+    browser.go(homePageUrl + "/omar-ui/omar")
     println "Page Title: ${browser.getTitle()}"
     assert browser.getTitle() == "O2"
 }
