@@ -69,8 +69,13 @@ node ("${BUILD_NODE}"){
 
         stage("Clean Workspace")
         {
-            if ("${CLEAN_WORKSPACE}" == "true"){
-                archiveArtifacts '**/*.flv,**/*.mp4'
+            if ("${CLEAN_WORKSPACE}" == "true") {
+                try {
+                    archiveArtifacts '**/*.flv,**/*.mp4'
+                } catch (Exception e) {
+                    // Ignored since the video may not be there in case of failure.
+                    println "INFO: Did not archive video's for this test run. ($e)"
+                }
                 step([$class: 'WsCleanup'])
             }
         }
