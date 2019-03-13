@@ -162,7 +162,7 @@ And(~/I adjust the (.*) of a layer$/) {
         def imagePropertiesButton = browser.page.$("body").find("a").find { it.@title == "Image Properties" }
         imagePropertiesButton.click()
 
-
+println browser.driver.executeScript("return tlv.layers[ ${it - 1} ].imageId;")
         switch (imageProperty)
         {
             case "bands":
@@ -333,6 +333,7 @@ Then(~/I get images that contain (.*)$/) {
         def coordinate = location.split(",").reverse().collect { it as Double }
         def layers = browser.driver.executeScript("return tlv.layers ? tlv.layers.length : 0;") as Integer
         (1..layers).each {
+println browser.driver.executeScript("return tlv.layers[ ${it - 1} ].imageId;")
             def geometry = JsonOutput.toJson(browser.driver.executeScript("return tlv.layers[ ${it - 1} ].metadata.footprint"))
             println geometry
             def extent = browser.driver.executeScript("return new ol.format.WKT().readGeometry( ${geometry} ).getExtent()")
