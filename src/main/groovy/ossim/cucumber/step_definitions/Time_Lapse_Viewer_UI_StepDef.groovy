@@ -256,6 +256,7 @@ Then(~/all images should be within the date range specified$/) { ->
 
     def layers = browser.driver.executeScript("return tlv.layers.length;") as Integer
     (1..layers).each {
+        println browser.driver.executeScript("return tlv.layers[ ${it - 1} ].acquisitionDate;")
         def date = Date.parse("yyyy-MM-dd HH:mm:ss", browser.driver.executeScript("return tlv.layers[ ${it - 1} ].acquisitionDate;"))
 
 
@@ -333,8 +334,9 @@ Then(~/I get images that contain (.*)$/) {
         def layers = browser.driver.executeScript("return tlv.layers ? tlv.layers.length : 0;") as Integer
         (1..layers).each {
             def geometry = JsonOutput.toJson(browser.driver.executeScript("return tlv.layers[ ${it - 1} ].metadata.footprint"))
+            println geometry
             def extent = browser.driver.executeScript("return new ol.format.WKT().readGeometry( ${geometry} ).getExtent()")
-
+            println extent
 
             assert browser.driver.executeScript("return ol.extent.containsCoordinate( ${extent}, ${coordinate} )") == true
         }
