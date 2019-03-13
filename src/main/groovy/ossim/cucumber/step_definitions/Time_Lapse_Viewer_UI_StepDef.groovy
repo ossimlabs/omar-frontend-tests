@@ -37,20 +37,20 @@ Given(~/^I am starting the tlv ui selenium server$/) {
         command.execute()
         sleep(3000)
         println "Starting video recording..."
-        command = ["flvrec.py", "-o", "${videoPrefix}high_quality_video.flv", "localhost", "5900"]
+        //command = ["flvrec.py", "-o", "${videoPrefix}high_quality_video.flv", "localhost", "5900"]
         command.execute()
         sleep(3000)
 }
 
 Given(~/^I am creating the tlv browsers$/) {
     ->
-        
+
         // Create chromeBrowser
         // chromeBrowser = new Browser(driver: new ChromeDriver()); break;
-        
+
         // Create firefoxBrowser
         def driver
-        def file = new File( config.browsers.firefox.profile )
+        def file = new File( "blah" )//config.browsers.firefox.profile )
         if ( file.exists() ) {
             def profile = new FirefoxProfile( file )
             driver = new FirefoxDriver( profile )
@@ -162,7 +162,6 @@ And(~/I adjust the (.*) of a layer$/) {
         def imagePropertiesButton = browser.page.$("body").find("a").find { it.@title == "Image Properties" }
         imagePropertiesButton.click()
 
-
         switch (imageProperty)
         {
             case "bands":
@@ -236,7 +235,7 @@ Given(~/^that I am starting at the TLV home page using (.*)$/) {
                 browser = firefoxBrowser
                 break
         }
-        
+
         browser.go(homePageUrl)
         def pageTitle = browser.getTitle()
 
@@ -268,12 +267,12 @@ Then(~/I can use the arrow keys to cycle through the stack$/) { ->
     def layers = browser.driver.executeScript("return tlv.layers.length;") as Integer
     (1..layers).each {
         def imageId = browser.driver.executeScript("return tlv.layers[ ${it - 1} ].imageId;")
-        assert browser.page.$("#imageIdDiv").text().contains(imageId) == true
+        assert browser.page.$("#imageIdDiv")[0].text().contains(imageId) == true
 
         def acquisitionDate = browser.driver.executeScript("return tlv.layers[ ${it - 1} ].acquisitionDate;")
-        assert browser.page.$("#acquisitionDateDiv").text().contains(acquisitionDate) == true
+        assert browser.page.$("#acquisitionDateDiv")[0].text().contains(acquisitionDate) == true
 
-        assert browser.page.$("#tlvLayerCountSpan").text() == "${it}/${layers}"
+        assert browser.page.$("#tlvLayerCountSpan")[0].text() == "${it}/${layers}"
         browser.page.$("body") << Keys.ARROW_RIGHT
 
         sleep(1000)
@@ -283,12 +282,12 @@ Then(~/I can use the arrow keys to cycle through the stack$/) { ->
         browser.page.$("body") << Keys.ARROW_LEFT
 
         def imageId = browser.driver.executeScript("return tlv.layers[ ${it - 1} ].imageId;")
-        assert browser.page.$("#imageIdDiv").text().contains(imageId) == true
+        assert browser.page.$("#imageIdDiv")[0].text().contains(imageId) == true
 
         def acquisitionDate = browser.driver.executeScript("return tlv.layers[ ${it - 1} ].acquisitionDate;")
-        assert browser.page.$("#acquisitionDateDiv").text().contains(acquisitionDate) == true
+        assert browser.page.$("#acquisitionDateDiv")[0].text().contains(acquisitionDate) == true
 
-        assert browser.page.$("#tlvLayerCountSpan").text() == "${it}/${layers}"
+        assert browser.page.$("#tlvLayerCountSpan")[0].text() == "${it}/${layers}"
 
         sleep(1000)
     }
@@ -303,7 +302,7 @@ Then(~/I can use the delete key to remove an image from the stack$/) { ->
     sleep(1000)
 
     assert layersBeforeDelete == layersAfterDelete + 1
-    assert browser.page.$("#tlvLayerCountSpan").text() == "1/${layersBeforeDelete - 1}"
+    assert browser.page.$("#tlvLayerCountSpan")[0].text() == "1/${layersBeforeDelete - 1}"
 }
 
 Then(~/I can use the mouse to pan and zoom on the imagery$/) { ->
@@ -333,8 +332,7 @@ Then(~/I get images that contain (.*)$/) {
         def layers = browser.driver.executeScript("return tlv.layers ? tlv.layers.length : 0;") as Integer
         (1..layers).each {
             def geometry = JsonOutput.toJson(browser.driver.executeScript("return tlv.layers[ ${it - 1} ].metadata.footprint"))
-            def extent = browser.driver.executeScript("return new ol.format.GeoJSON().readGeometry( ${geometry} ).getExtent()")
-
+            def extent = browser.driver.executeScript("return new ol.format.WKT().readGeometry( ${geometry} ).getExtent()")
 
             assert browser.driver.executeScript("return ol.extent.containsCoordinate( ${extent}, ${coordinate} )") == true
         }
@@ -403,7 +401,7 @@ When(~/I search for imagery near (.*)$/) {
         browser.page.$("#searchLocationInput").value(location)
         sleep(2000)
 
-        browser.page.$("#searchDialog").find(".modal-footer").find(".btn-primary")[0].click()
+        browser.page.$("#searchDialog").find(".modal-footer").find(".btn-primary")[1].click()
 
         def layers
         // wait a maximum of 30 seconds for results to return
