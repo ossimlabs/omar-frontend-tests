@@ -406,7 +406,7 @@ When(~/I search for imagery near (.*)$/) {
         browser.page.$("#searchLocationInput").value(location)
         sleep(2000)
 
-        browser.page.$("#searchDialog").find(".modal-footer").find(".btn-primary")[0].click()
+        browser.page.$("#searchDialog").find(".modal-footer").find(".btn-primary")[1].click()
 
         def layers
         // wait a maximum of 30 seconds for results to return
