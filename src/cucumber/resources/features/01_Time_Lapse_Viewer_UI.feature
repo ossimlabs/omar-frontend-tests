@@ -83,7 +83,7 @@ Feature: TLVUserInterface
   Scenario: TLV image adjustments
     Given that I am starting at the TLV home page using Firefox
     When I search for imagery near Paris, France
-#    And I adjust the bands of a layer
+    And I adjust the bands of a layer
 #    And I adjust the DRA region of a layer
 #    And I adjust the interpolation of a layer
 #    And I adjust the DRA of a layer
