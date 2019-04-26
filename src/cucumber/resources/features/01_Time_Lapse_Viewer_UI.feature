@@ -86,7 +86,7 @@ Feature: TLVUserInterface
     And I adjust the bands of a layer
     And I adjust the DRA region of a layer
     And I adjust the interpolation of a layer
-#    And I adjust the DRA of a layer
+    And I adjust the DRA of a layer
     And I adjust the sharpness of a layer
 #    And I adjust the brightness of a layer
 #    And I adjust the contrast of a layer
