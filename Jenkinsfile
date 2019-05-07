@@ -64,7 +64,6 @@ node ("${BUILD_NODE}"){
                 pendingFails: false,
                 skippedFails: false,
                 undefinedFails: false])
-           cucumberSlackSend channel: '#ossimlabs_jenkins', json: "build/frontend.json"
         }
 
         stage("Clean Workspace")

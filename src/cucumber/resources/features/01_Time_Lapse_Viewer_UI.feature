@@ -88,8 +88,8 @@ Feature: TLVUserInterface
     And I adjust the interpolation of a layer
     And I adjust the DRA of a layer
     And I adjust the sharpness of a layer
-    And I adjust the brightness of a layer
-    And I adjust the contrast of a layer
+#    And I adjust the brightness of a layer
+#    And I adjust the contrast of a layer
     Then the layer's image pixels change
 
 # O2SVC-734 (U) OC2S user interfaces shall run in a web browser
