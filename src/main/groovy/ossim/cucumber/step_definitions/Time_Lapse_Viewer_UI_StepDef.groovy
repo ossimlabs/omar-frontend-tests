@@ -202,7 +202,7 @@ And(~/I adjust the (.*) of a layer$/) {
                 option.click()
                 break
             case "sharpness":
-                def select = browser.page.$("#sharpenSlider")
+                def slider = browser.page.$("#sharpenSlider")
                 def track = slider.find(".slider-track-high")
                 track.click()
                 break
