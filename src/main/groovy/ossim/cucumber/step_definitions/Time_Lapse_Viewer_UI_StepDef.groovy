@@ -37,9 +37,13 @@ Given(~/^I am starting the tlv ui selenium server$/) {
         command.execute()
         sleep(3000)
         println "Starting video recording..."
-        //command = ["flvrec.py", "-o", "${videoPrefix}high_quality_video.flv", "localhost", "5900"]
-        command.execute()
-        sleep(3000)
+        try {
+            command = ["flvrec.py", "-o", "${videoPrefix}high_quality_video.flv", "localhost", "5900"]
+            command.execute()
+            sleep(3000)
+        } catch (IOException e) {
+            println('Starting video recording failed...')
+        }
 }
 
 Given(~/^I am creating the tlv browsers$/) {
