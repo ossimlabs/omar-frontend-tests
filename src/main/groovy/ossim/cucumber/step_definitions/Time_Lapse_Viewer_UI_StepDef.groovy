@@ -33,9 +33,13 @@ Given(~/^I am starting the tlv ui selenium server$/) {
         remoteDisplay = command.execute()
         sleep(3000)
         println "Starting VNC server..."
-        command = ["x11vnc", "-display", ":1", "-localhost", "-shared", "-forever"]
-        command.execute()
-        sleep(3000)
+        try {
+            command = ["x11vnc", "-display", ":1", "-localhost", "-shared", "-forever"]
+            command.execute()
+            sleep(3000)
+        } catch (IOException e) {
+            println('Starting VNC server failed...')
+        }
         println "Starting video recording..."
         try {
             command = ["flvrec.py", "-o", "${videoPrefix}high_quality_video.flv", "localhost", "5900"]
