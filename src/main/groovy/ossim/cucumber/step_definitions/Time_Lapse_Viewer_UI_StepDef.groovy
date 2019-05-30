@@ -408,6 +408,7 @@ When(~/I search for imagery near (.*)$/) {
         sleep(1000)
         browser.page.$("#searchLocationInput").value(location)
         sleep(2000)
+        browser.driver.executeScript("getSelectedSensors = function() { return []; };")
 
         browser.page.$("#searchDialog").find(".modal-footer").find(".btn-primary")[1].click()
 
