@@ -170,6 +170,24 @@ And(~/I adjust the (.*) of a layer$/) {
         def imagePropertiesButton = browser.page.$("body").find("a").find { it.@title == "Image Properties" }
         imagePropertiesButton.click()
 
+
+        // reset the image properties
+        def select = browser.page.$("#selectBandsMethodSelect")
+        def option = select.find("option").find { it.text() == "Default" }
+        option.click()
+
+        def select = browser.page.$("#dynamicRangeSelect")
+        def option = select.find("option").find { it.text() == "Auto Min Max" }
+        option.click()
+
+        def select = browser.page.$("#dynamicRangeRegionSelect")
+        def option = select.find("option").find { it.text() == "Global" }
+        option.click()
+
+        def select = browser.page.$("#interpolationSelect")
+        def option = select.find("option").find { it.text() == "Bilinear" }
+        option.click()
+
         switch (imageProperty)
         {
             case "bands":
