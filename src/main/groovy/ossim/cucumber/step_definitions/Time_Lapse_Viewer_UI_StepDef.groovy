@@ -280,7 +280,7 @@ Then(~/I can use the arrow keys to cycle through the stack$/) { ->
         def acquisitionDate = browser.driver.executeScript("return tlv.layers[ ${it - 1} ].acquisitionDate;")
         assert browser.page.$("#acquisitionDateDiv")[0].text().contains(acquisitionDate) == true
 
-        assert browser.page.$("#tlvLayerCountSpan")[0].text() == "${it}/${layers}"
+        assert browser.page.$(".tlvLayerCountSpan")[0].text() == "${it}/${layers}"
         browser.page.$("body") << Keys.ARROW_RIGHT
 
         sleep(1000)
@@ -295,7 +295,7 @@ Then(~/I can use the arrow keys to cycle through the stack$/) { ->
         def acquisitionDate = browser.driver.executeScript("return tlv.layers[ ${it - 1} ].acquisitionDate;")
         assert browser.page.$("#acquisitionDateDiv")[0].text().contains(acquisitionDate) == true
 
-        assert browser.page.$("#tlvLayerCountSpan")[0].text() == "${it}/${layers}"
+        assert browser.page.$(".tlvLayerCountSpan")[0].text() == "${it}/${layers}"
 
         sleep(1000)
     }
@@ -310,7 +310,7 @@ Then(~/I can use the delete key to remove an image from the stack$/) { ->
     sleep(1000)
 
     assert layersBeforeDelete == layersAfterDelete + 1
-    assert browser.page.$("#tlvLayerCountSpan")[0].text() == "1/${layersBeforeDelete - 1}"
+    assert browser.page.$(".tlvLayerCountSpan")[0].text() == "1/${layersBeforeDelete - 1}"
 }
 
 Then(~/I can use the mouse to pan and zoom on the imagery$/) { ->
