@@ -8,7 +8,7 @@ properties([
             [$class: "GitHubPushTrigger"]
     ]),
     [$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/ossimlabs/omar-frontend-tests'],
-    disableConcurrentBuilds()
+    buildDiscarder( logRotator( numToKeepStr: '5' ) )
 ])
 
 node ("${BUILD_NODE}"){
