@@ -172,21 +172,10 @@ And(~/I adjust the (.*) of a layer$/) {
 
 
         // reset the image properties
-        def select = browser.page.$("#selectBandsMethodSelect")
-        def option = select.find("option").find { it.text() == "Default" }
-        option.click()
-
-        def select = browser.page.$("#dynamicRangeSelect")
-        def option = select.find("option").find { it.text() == "Auto Min Max" }
-        option.click()
-
-        def select = browser.page.$("#dynamicRangeRegionSelect")
-        def option = select.find("option").find { it.text() == "Global" }
-        option.click()
-
-        def select = browser.page.$("#interpolationSelect")
-        def option = select.find("option").find { it.text() == "Bilinear" }
-        option.click()
+        ( browser.page.$("#selectBandsMethodSelect").find("option").find { it.text() == "Default" } ).click()
+        ( browser.page.$("#dynamicRangeSelect").find("option").find { it.text() == "Auto Min Max" } ).click()
+        ( browser.page.$("#dynamicRangeRegionSelect").find("option").find { it.text() == "Global" } ).click()
+        ( browser.page.$("#interpolationSelect").find("option").find { it.text() == "Bilinear" } ).click()
 
         switch (imageProperty)
         {
