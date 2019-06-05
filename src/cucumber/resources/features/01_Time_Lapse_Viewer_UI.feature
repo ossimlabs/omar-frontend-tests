@@ -88,7 +88,7 @@ Feature: TLVUserInterface
     And I adjust the contrast of a layer
     And I adjust the DRA of a layer
     And I adjust the DRA region of a layer
-    And I adjust the interpolation of a layer
+#    And I adjust the interpolation of a layer
 #    And I adjust the sharpness of a layer
     Then the layer's image pixels change
 
