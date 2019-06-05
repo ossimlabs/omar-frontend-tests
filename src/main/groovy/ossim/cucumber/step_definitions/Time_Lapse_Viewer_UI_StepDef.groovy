@@ -173,8 +173,9 @@ And(~/I adjust the (.*) of a layer$/) {
 
         // reset the image properties
         ( browser.page.$( "#selectBandsMethodSelect" ).find("option").find { it.text() == "Default" } ).click()
-          browser.page.$( "#brightnessSliderInput" ).slider( 'setValue', 0 )
-          browser.page.$( "#contrastSliderInput" ).slider( 'setValue', 100 ) 
+          browser.driver.executeScript( "$( '#brightnessSliderInput' ).slider( 'setValue', 0 );" )
+          browser.driver.executeScript( "$( '#contrastSliderInput' ).slider( 'setValue', 100 );" )
+          browser.driver.executeScript( "$( '#sharpnessSliderInput' ).slider( 'setValue', 0 );" )
         ( browser.page.$( "#dynamicRangeSelect" ).find("option").find { it.text() == "Auto Min Max" } ).click()
         ( browser.page.$( "#dynamicRangeRegionSelect" ).find("option").find { it.text() == "Global" } ).click()
         ( browser.page.$( "#interpolationSelect" ).find("option").find { it.text() == "Bilinear" } ).click()
@@ -221,6 +222,7 @@ And(~/I adjust the (.*) of a layer$/) {
             case "sharpness":
                 def slider = browser.page.$("#sharpenSlider")
                 def track = slider.find(".slider-track-high")
+                track.click()
                 track.click()
                 break
         }
