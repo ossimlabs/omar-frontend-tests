@@ -33,13 +33,21 @@ Given(~/^I am starting the tlv ui selenium server$/) {
         remoteDisplay = command.execute()
         sleep(3000)
         println "Starting VNC server..."
-        command = ["x11vnc", "-display", ":1", "-localhost", "-shared", "-forever"]
-        command.execute()
-        sleep(3000)
+        try {
+            command = ["x11vnc", "-display", ":1", "-localhost", "-shared", "-forever"]
+            command.execute()
+            sleep(3000)
+        } catch (IOException e) {
+            println('Starting VNC server failed...')
+        }
         println "Starting video recording..."
-        //command = ["flvrec.py", "-o", "${videoPrefix}high_quality_video.flv", "localhost", "5900"]
-        command.execute()
-        sleep(3000)
+        try {
+            command = ["flvrec.py", "-o", "${videoPrefix}high_quality_video.flv", "localhost", "5900"]
+            command.execute()
+            sleep(3000)
+        } catch (IOException e) {
+            println('Starting video recording failed...')
+        }
 }
 
 Given(~/^I am creating the tlv browsers$/) {
@@ -162,6 +170,17 @@ And(~/I adjust the (.*) of a layer$/) {
         def imagePropertiesButton = browser.page.$("body").find("a").find { it.@title == "Image Properties" }
         imagePropertiesButton.click()
 
+
+        // reset the image properties
+        ( browser.page.$( "#selectBandsMethodSelect" ).find("option").find { it.text() == "Default" } ).click()
+          browser.driver.executeScript( "return \$( '#brightnessSliderInput' ).slider( 'setValue', 0 );" )
+          browser.driver.executeScript( "return \$( '#contrastSliderInput' ).slider( 'setValue', 100 );" )
+        ( browser.page.$( "#dynamicRangeSelect" ).find("option").find { it.text() == "Auto Min Max" } ).click()
+        ( browser.page.$( "#dynamicRangeRegionSelect" ).find("option").find { it.text() == "Global" } ).click()
+        ( browser.page.$( "#interpolationSelect" ).find("option").find { it.text() == "Bilinear" } ).click()
+          browser.driver.executeScript( "return \$( '#sharpnessSliderInput' ).slider( 'setValue', 0 );" )
+          browser.driver.executeScript( "return updateImageProperties();" )
+
         switch (imageProperty)
         {
             case "bands":
@@ -202,9 +221,10 @@ And(~/I adjust the (.*) of a layer$/) {
                 option.click()
                 break
             case "sharpness":
-                def select = browser.page.$("#sharpenModeSelect")
-                def option = select.find("option").find { it.text() == "Light" }
-                option.click()
+                def slider = browser.page.$("#sharpenSlider")
+                def track = slider.find(".slider-track-high")
+                track.click()
+                track.click()
                 break
         }
 
@@ -272,7 +292,7 @@ Then(~/I can use the arrow keys to cycle through the stack$/) { ->
         def acquisitionDate = browser.driver.executeScript("return tlv.layers[ ${it - 1} ].acquisitionDate;")
         assert browser.page.$("#acquisitionDateDiv")[0].text().contains(acquisitionDate) == true
 
-        assert browser.page.$("#tlvLayerCountSpan")[0].text() == "${it}/${layers}"
+        assert browser.page.$(".tlvLayerCountSpan")[0].text() == "${it}/${layers}"
         browser.page.$("body") << Keys.ARROW_RIGHT
 
         sleep(1000)
@@ -287,7 +307,7 @@ Then(~/I can use the arrow keys to cycle through the stack$/) { ->
         def acquisitionDate = browser.driver.executeScript("return tlv.layers[ ${it - 1} ].acquisitionDate;")
         assert browser.page.$("#acquisitionDateDiv")[0].text().contains(acquisitionDate) == true
 
-        assert browser.page.$("#tlvLayerCountSpan")[0].text() == "${it}/${layers}"
+        assert browser.page.$(".tlvLayerCountSpan")[0].text() == "${it}/${layers}"
 
         sleep(1000)
     }
@@ -302,7 +322,7 @@ Then(~/I can use the delete key to remove an image from the stack$/) { ->
     sleep(1000)
 
     assert layersBeforeDelete == layersAfterDelete + 1
-    assert browser.page.$("#tlvLayerCountSpan")[0].text() == "1/${layersBeforeDelete - 1}"
+    assert browser.page.$(".tlvLayerCountSpan")[0].text() == "1/${layersBeforeDelete - 1}"
 }
 
 Then(~/I can use the mouse to pan and zoom on the imagery$/) { ->
@@ -400,6 +420,7 @@ When(~/I search for imagery near (.*)$/) {
         sleep(1000)
         browser.page.$("#searchLocationInput").value(location)
         sleep(2000)
+        browser.driver.executeScript("getSelectedSensors = function() { return []; };")
 
         browser.page.$("#searchDialog").find(".modal-footer").find(".btn-primary")[1].click()
 
