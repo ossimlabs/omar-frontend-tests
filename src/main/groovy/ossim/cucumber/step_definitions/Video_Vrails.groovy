@@ -67,18 +67,10 @@ Given(~/^I am creating the firefox browser$/) {
 }
 
 Given(~/^that I am starting at the video-vrails homepage using firefox$/) {
-    String browserType ->
+    ->
         println "Using ${browserType} and pulling up video-vrails page"
-
-        switch (browserType)
-        {
-            case "Chrome":
-                browser = chromeBrowser
-                break
-            case "Firefox":
-                browser = firefoxBrowser
-                break
-        }
+        
+        browser = firefoxBrowser
 
         browser.go(homePageUrl)
         def pageTitle = browser.getTitle()
