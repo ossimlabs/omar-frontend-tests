@@ -10,6 +10,7 @@ rbtcloudRootDir = "https://omar-${targetDeployment}.${domainName}"
 
 println("\nOMAR URL being tested: ${rbtcloudRootDir}\n")
 
+ovvUrl = "${rbtcloudRootDir}/omar-video-vrails"
 tlvUrl = "${rbtcloudRootDir}/tlv"
 mensaUrl = "${rbtcloudRootDir}/omar-mensa"
 wfsUrl = "${rbtcloudRootDir}/omar-wfs"
