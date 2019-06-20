@@ -49,8 +49,6 @@ Given(~/^I am starting the video vrails selenium server$/) {
 
 Given(~/^I am creating the firefox browser$/) {
     ->
-    ->
-
         // Create chromeBrowser
         // chromeBrowser = new Browser(driver: new ChromeDriver()); break;
 
