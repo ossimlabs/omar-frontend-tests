@@ -55,7 +55,7 @@ Given(~/^I am creating the tlv browsers$/) {
 
         // Create chromeBrowser
         // chromeBrowser = new Browser(driver: new ChromeDriver()); break;
-
+        println "creating the tlv browser"
         // Create firefoxBrowser
         def driver
         def file = new File( "blah" )//config.browsers.firefox.profile )
