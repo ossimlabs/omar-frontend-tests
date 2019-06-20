@@ -68,8 +68,8 @@ Given(~/^I am creating the firefox browser$/) {
 
 Given(~/^that I am starting at the video-vrails homepage using firefox$/) {
     ->
-        println "Using ${browserType} and pulling up video-vrails page"
-        
+        println "Using firefox and pulling up video-vrails page"
+
         browser = firefoxBrowser
 
         browser.go(homePageUrl)
