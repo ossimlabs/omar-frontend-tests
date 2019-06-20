@@ -1,9 +1,9 @@
 @video_vrails
-Feature: Is it Friday yet?
-  Everybody wants to know when it's Friday
+Feature: Video Vrails Interface?
+  Is it working?
 
-  # Scenario: Start selenium
-  #   Given I am starting the yup ui selenium server
+  Scenario: Start selenium
+    Given I am starting the video vrails selenium server
 
   Scenario: Start browsers
     Given I am creating the chrome browser
