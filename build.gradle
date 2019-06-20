@@ -43,7 +43,7 @@ task frontend() {
             args = [
                     "--tags",
                     "@video_vrails",
-                    "@o2_ui_search, @tlv_ui",
+                    //"@o2_ui_search, @tlv_ui",
                     //"@swagger_ui",
                     "--tags",
                     "~@C2S",
