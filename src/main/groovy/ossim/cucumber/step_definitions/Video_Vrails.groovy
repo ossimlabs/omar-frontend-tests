@@ -15,7 +15,7 @@ this.metaClass.mixin(cucumber.api.groovy.EN)
 
 
 def config = CucumberConfig.config
-String homePageUrl = config.ovvUrl // ovv is the omar-video-vrails url suffix
+def homePageUrl = config.ovvUrl // ovv is the omar-video-vrails url suffix
 
 def chromeBrowser
 def firefoxBrowser
