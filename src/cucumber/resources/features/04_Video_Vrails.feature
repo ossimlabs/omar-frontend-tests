@@ -6,8 +6,8 @@ Feature: Video Vrails Interface?
     Given I am starting the video vrails selenium server
 
   Scenario: Start browsers
-    Given I am creating the chrome browser
-    Given that I am starting at the video-vrails homepage using chrome
+    Given I am creating the firefox browser
+    Given that I am starting at the video-vrails homepage using firefox
 
   Scenario: Click button
     Given I have clicked the menu button while the menu is NOT displayed

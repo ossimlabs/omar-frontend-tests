@@ -18,6 +18,7 @@ def config = CucumberConfig.config
 def homePageUrl = config.ovvUrl // ovv is the omar-video-vrails url suffix
 
 def chromeBrowser
+def firefoxBrowser
 
 buildNumber = System.getenv("BUILD_NUMBER")
 videoPrefix = buildNumber != null ? "${buildNumber}_" : ""
@@ -46,27 +47,40 @@ Given(~/^I am starting the video vrails selenium server$/) {
         }
 }
 
-Given(~/^I am creating the chrome browser$/) {
+Given(~/^I am creating the firefox browser$/) {
     ->
-        println "Creating the chrome browser..."
+    ->
+
+        // Create chromeBrowser
+        // chromeBrowser = new Browser(driver: new ChromeDriver()); break;
+
+        // Create firefoxBrowser
+        println "Creating the firefox browser..."
         def driver
-        chromeBrowser = new Browser(driver: new ChromeDriver())
-        println "Created the browser"
+        def file = new File( "blah" )//config.browsers.firefox.profile )
+        if ( file.exists() ) {
+            def profile = new FirefoxProfile( file )
+            driver = new FirefoxDriver( profile )
+        }
+        else {
+            driver = new FirefoxDriver()
+        }
+        firefoxBrowser = new Browser( driver: driver )
 }
 
-Given(~/^that I am starting at the video-vrails homepage using chrome$/) {
+Given(~/^that I am starting at the video-vrails homepage using firefox$/) {
     ->
         println "Trying to pull up video-vrails page..."
-        chromeBrowser.go(homePageUrl)
-        def pageTitle = chromeBrowser.getTitle()
+        firefoxBrowser.go(homePageUrl)
+        def pageTitle = firefoxBrowser.getTitle()
 
         assert pageTitle == "Welcome to Grails & Vue"
 }
 
 Given(~/^I have clicked the menu button while the menu is NOT displayed$/) {
     ->
-        def menu = chromeBrowser.page.$("body").find("div").find { it.@class == "v-overlay v-overlay--active" }
-        def dropdown_button = chromeBrowser.page.$("body").find("i").find { it.@class == "v-icon fas fa-bars theme--dark" }
+        def menu = firefoxBrowser.page.$("body").find("div").find { it.@class == "v-overlay v-overlay--active" }
+        def dropdown_button = firefoxBrowser.page.$("body").find("i").find { it.@class == "v-icon fas fa-bars theme--dark" }
         sleep(1000)
         if (menu == null)
             dropdown_button.click()
@@ -74,6 +88,6 @@ Given(~/^I have clicked the menu button while the menu is NOT displayed$/) {
 
 Then(~/^The menu should be displayed$/) {
     ->
-        assert chromeBrowser.page.$("body").find("div").find { it.@class == "v-overlay v-overlay--active" } != null
+        assert firefoxBrowser.page.$("body").find("div").find { it.@class == "v-overlay v-overlay--active" } != null
 }
 
