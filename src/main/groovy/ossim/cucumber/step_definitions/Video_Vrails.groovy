@@ -73,7 +73,7 @@ Given(~/^that I am starting at the video-vrails homepage using firefox$/) {
         browser = firefoxBrowser
         println homePageUrl
         //browser.setBaseUrl("https://omar-dev.ossim.io/omar-video-vrails/")
-        browser.go("https://omar-dev.ossim.io/omar-video-vrails/")
+        browser.go(homePageUrl)
         def pageTitle = browser.getTitle()
 
         assert pageTitle == "Welcome to Grails & Vue"
