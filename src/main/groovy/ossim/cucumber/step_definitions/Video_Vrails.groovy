@@ -71,7 +71,7 @@ Given(~/^that I am starting at the video-vrails homepage using firefox$/) {
         println "Using firefox and pulling up video-vrails page"
 
         browser = firefoxBrowser
-
+        browser.setBaseUrl(homePageUrl)
         browser.go(homePageUrl)
         def pageTitle = browser.getTitle()
 
