@@ -51,6 +51,7 @@ Given(~/^I am creating the chrome browser$/) {
         println "Creating the chrome browser..."
         def driver
         chromeBrowser = new Browser(driver: new ChromeDriver())
+        println "Created the browser"
 }
 
 Given(~/^that I am starting at the video-vrails homepage using chrome$/) {
