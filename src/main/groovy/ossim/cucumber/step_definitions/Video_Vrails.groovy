@@ -71,7 +71,8 @@ Given(~/^that I am starting at the video-vrails homepage using firefox$/) {
         println "Using firefox and pulling up video-vrails page"
 
         browser = firefoxBrowser
-        println homePageUrl
+        println "printing homepage url" homePageUrl
+        println "printing tlv url" config.tlvUrl
         browser.setBaseUrl("https://omar-dev.ossim.io/omar-video-vrails/")
         browser.go(homePageUrl)
         def pageTitle = browser.getTitle()
