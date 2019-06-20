@@ -15,7 +15,7 @@ this.metaClass.mixin(cucumber.api.groovy.EN)
 
 
 def config = CucumberConfig.config
-def homePageUrl = config.ovvUrl // ovv is the omar-video-vrails url suffix
+String homePageUrl = config.ovvUrl // ovv is the omar-video-vrails url suffix
 
 def chromeBrowser
 def firefoxBrowser
@@ -71,8 +71,8 @@ Given(~/^that I am starting at the video-vrails homepage using firefox$/) {
         println "Using firefox and pulling up video-vrails page"
 
         browser = firefoxBrowser
-        browser.setBaseUrl("https://google.com")
-        browser.go("https://google.com")
+        browser.setBaseUrl(homePageUrl)
+        browser.go(homePageUrl)
         def pageTitle = browser.getTitle()
 
         assert pageTitle == "Welcome to Grails & Vue"
