@@ -42,6 +42,7 @@ task frontend() {
             classpath = configurations.cucumberRuntime
             args = [
                     "--tags",
+                    "@video_vrails",
                     "@o2_ui_search, @tlv_ui",
                     //"@swagger_ui",
                     "--tags",
