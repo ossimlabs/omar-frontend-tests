@@ -67,18 +67,29 @@ Given(~/^I am creating the firefox browser$/) {
 }
 
 Given(~/^that I am starting at the video-vrails homepage using firefox$/) {
-    ->
-        println "Trying to pull up video-vrails page..."
-        firefoxBrowser.go(homePageUrl)
-        def pageTitle = firefoxBrowser.getTitle()
+    String browserType ->
+        println "Using ${browserType} and pulling up video-vrails page"
+
+        switch (browserType)
+        {
+            case "Chrome":
+                browser = chromeBrowser
+                break
+            case "Firefox":
+                browser = firefoxBrowser
+                break
+        }
+
+        browser.go(homePageUrl)
+        def pageTitle = browser.getTitle()
 
         assert pageTitle == "Welcome to Grails & Vue"
 }
 
 Given(~/^I have clicked the menu button while the menu is NOT displayed$/) {
     ->
-        def menu = firefoxBrowser.page.$("body").find("div").find { it.@class == "v-overlay v-overlay--active" }
-        def dropdown_button = firefoxBrowser.page.$("body").find("i").find { it.@class == "v-icon fas fa-bars theme--dark" }
+        def menu = browser.page.$("body").find("div").find { it.@class == "v-overlay v-overlay--active" }
+        def dropdown_button = browser.page.$("body").find("i").find { it.@class == "v-icon fas fa-bars theme--dark" }
         sleep(1000)
         if (menu == null)
             dropdown_button.click()
@@ -86,6 +97,6 @@ Given(~/^I have clicked the menu button while the menu is NOT displayed$/) {
 
 Then(~/^The menu should be displayed$/) {
     ->
-        assert firefoxBrowser.page.$("body").find("div").find { it.@class == "v-overlay v-overlay--active" } != null
+        assert browser.page.$("body").find("div").find { it.@class == "v-overlay v-overlay--active" } != null
 }
 
