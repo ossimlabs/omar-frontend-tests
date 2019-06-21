@@ -17,6 +17,7 @@ this.metaClass.mixin(cucumber.api.groovy.EN)
 def config = CucumberConfig.config
 def homePageUrl = config.tlvUrl
 def imageProperties = []
+def defaultImageProperty
 boolean browserCreated = false
 
 def firefoxBrowser
@@ -165,7 +166,7 @@ And(~/I adjust the (.*) of a layer$/) {
     String imageProperty ->
 
         println "Adjusting ${imageProperty}"
-
+    
         browser.driver.executeScript("return displayNavbar();")
         def imagePropertiesButton = browser.page.$("body").find("a").find { it.@title == "Image Properties" }
         imagePropertiesButton.click()
@@ -180,6 +181,10 @@ And(~/I adjust the (.*) of a layer$/) {
         ( browser.page.$( "#interpolationSelect" ).find("option").find { it.text() == "Bilinear" } ).click()
           browser.driver.executeScript( "return \$( '#sharpnessSliderInput' ).slider( 'setValue', 0 );" )
           browser.driver.executeScript( "return updateImageProperties();" )
+
+        sleep(3000)
+
+        defaultImageProperty = getCanvasData()
 
         switch (imageProperty)
         {
@@ -197,8 +202,16 @@ And(~/I adjust the (.*) of a layer$/) {
                 break
             case "brightness":
                 def slider = browser.page.$("#brightnessSlider")
-                def track = slider.find(".slider-track-high")
-                track.click()
+                // def track = slider.find(".slider-track-high")
+                // track.click()
+                Actions action = new Actions(driver)
+                action.perform()
+                action = action.clickAndHold(slider)
+                action.perform()
+                action = action.moveByOffset(500,0)
+                action.perform()
+                action = action.release(slider)
+                action.perform()
                 break
             case "contrast":
                 def slider = browser.page.$("#contrastSlider")
@@ -227,10 +240,9 @@ And(~/I adjust the (.*) of a layer$/) {
                 track.click()
                 break
         }
-
         browser.driver.executeScript("return updateImageProperties(true) ;")
-        sleep(10000) // gives enough time for SOMETHING to change
-        imageProperties.push(getCanvasData())
+        sleep(10000) // gives enough time for SOMETHING to change  
+        imageProperties.push(getCanvasData()) 
 }
 
 And(~/I click the Summary Table button$/) { ->
@@ -373,16 +385,13 @@ Then(~/the image displays the annotations$/) { ->
 }
 
 Then(~/the layer's image pixels change$/) { ->
-    def allImagesAreDifferent = true
-    imageProperties.eachWithIndex {
-        canvasData1, index1 ->
-            imageProperties.eachWithIndex {
-                canvasData2, index2 ->
-                    if (index1 != index2)
-                    {
-                        assert canvasData1 != canvasData2
-                    }
-            }
+    println "checking image difference..."
+    def properties = [ "bands", "brightness", "contrast", "DRA", "DRA_Region", "interpolation", "sharpness" ]
+
+    int size = imageProperties.size()
+    for (int i = 0; i < size; i++) {
+        println "Checking image difference for " + properties.get(i)
+        assert imageProperties.get(i) != defaultImageProperty
     }
 }
 
