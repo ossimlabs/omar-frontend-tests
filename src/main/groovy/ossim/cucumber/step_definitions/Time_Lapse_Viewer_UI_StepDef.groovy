@@ -202,16 +202,8 @@ And(~/I adjust the (.*) of a layer$/) {
                 break
             case "brightness":
                 def slider = browser.page.$("#brightnessSlider")
-                // def track = slider.find(".slider-track-high")
-                // track.click()
-                Actions action = new Actions(driver)
-                action.perform()
-                action = action.clickAndHold(slider)
-                action.perform()
-                action = action.moveByOffset(500,0)
-                action.perform()
-                action = action.release(slider)
-                action.perform()
+                def track = slider.find(".slider-track-high")
+                track.click()
                 break
             case "contrast":
                 def slider = browser.page.$("#contrastSlider")
