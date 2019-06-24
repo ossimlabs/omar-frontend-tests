@@ -65,9 +65,10 @@ Given(~/^I am creating the tlv browsers$/) {
             driver = new FirefoxDriver( profile )
         }
         else {
-            driver = new FirefoxDriver()
+            // driver = new FirefoxDriver()
         }
-        firefoxBrowser = new Browser( driver: driver )
+        // firefoxBrowser = new Browser( driver: driver )
+        firefoxBrowser = new Browser(driver: new ChromeDriver())
 }
 
 Given(~/^I am stopping the tlv ui selenium server$/) {
@@ -184,8 +185,12 @@ And(~/I adjust the (.*) of a layer$/) {
 
         sleep(3000)
 
-        defaultImageProperty = getCanvasData()
+        if (defaultImageProperty == null) {
+            defaultImageProperty = getCanvasData()
+            println "set defaultImageProperty"
+        }
 
+        def actions = new Actions(browser.driver)
         switch (imageProperty)
         {
             case "bands":
@@ -201,18 +206,18 @@ And(~/I adjust the (.*) of a layer$/) {
                 }
                 break
             case "brightness":
-                def slider = browser.page.$("#brightnessSlider")
-                def track = slider.find(".slider-track-high")
-                track.click()
+                def properties_menu = browser.page.$("#brightnessSliderInput").parent()
+                def slideHandle = properties_menu.firstElement()
+                actions.dragAndDropBy(slideHandle, 10, 0).perform()
                 break
             case "contrast":
-                def slider = browser.page.$("#contrastSlider")
-                def track = slider.find(".slider-track-high")
-                track.click()
+                def properties_menu = browser.page.$("#contrastSliderInput").parent()
+                def slideHandle = properties_menu.firstElement()
+                actions.dragAndDropBy(slideHandle, 10, 0).perform()
                 break
             case "DRA":
                 def select = browser.page.$("#dynamicRangeSelect")
-                def option = select.find("option").find { it.text() == "None" }
+                def option = select.find("option").find { it.text() == "Linear" }
                 option.click()
                 break
             case "DRA region":
@@ -225,11 +230,15 @@ And(~/I adjust the (.*) of a layer$/) {
                 def option = select.find("option").find { it.text() == "Sinc" }
                 option.click()
                 break
+            case "opacity":
+                def properties_menu = browser.page.$("#opacitySliderInput").parent()
+                def slideHandle = properties_menu.firstElement()
+                actions.dragAndDropBy(slideHandle, -10, 0).perform()
+                break
             case "sharpness":
-                def slider = browser.page.$("#sharpenSlider")
-                def track = slider.find(".slider-track-high")
-                track.click()
-                track.click()
+                def properties_menu = browser.page.$("#sharpenSliderInput").parent()
+                def slideHandle = properties_menu.firstElement()
+                actions.dragAndDropBy(slideHandle, 10, 0).perform()
                 break
         }
         browser.driver.executeScript("return updateImageProperties(true) ;")
@@ -377,12 +386,9 @@ Then(~/the image displays the annotations$/) { ->
 }
 
 Then(~/the layer's image pixels change$/) { ->
-    println "checking image difference..."
-    def properties = [ "bands", "brightness", "contrast", "DRA", "DRA_Region", "interpolation", "sharpness" ]
-
     int size = imageProperties.size()
     for (int i = 0; i < size; i++) {
-        println "Checking image difference for " + properties.get(i)
+        println "Checking image difference for property " + i
         assert imageProperties.get(i) != defaultImageProperty
     }
 }
