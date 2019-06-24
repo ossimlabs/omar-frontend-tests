@@ -65,10 +65,9 @@ Given(~/^I am creating the tlv browsers$/) {
             driver = new FirefoxDriver( profile )
         }
         else {
-            // driver = new FirefoxDriver()
+            driver = new FirefoxDriver()
         }
-        // firefoxBrowser = new Browser( driver: driver )
-        firefoxBrowser = new Browser(driver: new ChromeDriver())
+        firefoxBrowser = new Browser( driver: driver )
 }
 
 Given(~/^I am stopping the tlv ui selenium server$/) {
