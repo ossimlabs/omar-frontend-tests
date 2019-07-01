@@ -7,6 +7,7 @@ driver = "firefox" // firefox is default
 
 System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver");
 
+
 reportsDir = new File("build/geb-reports")
 
 waiting {
@@ -39,5 +40,4 @@ environments {
         }
     }
 
-}
-*/
+}*/

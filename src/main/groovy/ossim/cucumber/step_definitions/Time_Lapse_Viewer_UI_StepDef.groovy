@@ -17,6 +17,7 @@ this.metaClass.mixin(cucumber.api.groovy.EN)
 def config = CucumberConfig.config
 def homePageUrl = config.tlvUrl
 def imageProperties = []
+def defaultImageProperty
 boolean browserCreated = false
 
 def firefoxBrowser
@@ -55,7 +56,7 @@ Given(~/^I am creating the tlv browsers$/) {
 
         // Create chromeBrowser
         // chromeBrowser = new Browser(driver: new ChromeDriver()); break;
-
+        println "creating the tlv browser"
         // Create firefoxBrowser
         def driver
         def file = new File( "blah" )//config.browsers.firefox.profile )
@@ -165,7 +166,7 @@ And(~/I adjust the (.*) of a layer$/) {
     String imageProperty ->
 
         println "Adjusting ${imageProperty}"
-
+    
         browser.driver.executeScript("return displayNavbar();")
         def imagePropertiesButton = browser.page.$("body").find("a").find { it.@title == "Image Properties" }
         imagePropertiesButton.click()
@@ -181,6 +182,14 @@ And(~/I adjust the (.*) of a layer$/) {
           browser.driver.executeScript( "return \$( '#sharpnessSliderInput' ).slider( 'setValue', 0 );" )
           browser.driver.executeScript( "return updateImageProperties();" )
 
+        sleep(3000)
+
+        if (defaultImageProperty == null) {
+            defaultImageProperty = getCanvasData()
+            println "set defaultImageProperty"
+        }
+
+        def actions = new Actions(browser.driver)
         switch (imageProperty)
         {
             case "bands":
@@ -196,18 +205,18 @@ And(~/I adjust the (.*) of a layer$/) {
                 }
                 break
             case "brightness":
-                def slider = browser.page.$("#brightnessSlider")
-                def track = slider.find(".slider-track-high")
-                track.click()
+                def properties_menu = browser.page.$("#brightnessSliderInput").parent()
+                def slideHandle = properties_menu.firstElement()
+                actions.dragAndDropBy(slideHandle, 10, 0).perform()
                 break
             case "contrast":
-                def slider = browser.page.$("#contrastSlider")
-                def track = slider.find(".slider-track-high")
-                track.click()
+                def properties_menu = browser.page.$("#contrastSliderInput").parent()
+                def slideHandle = properties_menu.firstElement()
+                actions.dragAndDropBy(slideHandle, 10, 0).perform()
                 break
             case "DRA":
                 def select = browser.page.$("#dynamicRangeSelect")
-                def option = select.find("option").find { it.text() == "None" }
+                def option = select.find("option").find { it.text() == "Linear" }
                 option.click()
                 break
             case "DRA region":
@@ -220,17 +229,20 @@ And(~/I adjust the (.*) of a layer$/) {
                 def option = select.find("option").find { it.text() == "Sinc" }
                 option.click()
                 break
+            case "opacity":
+                def properties_menu = browser.page.$("#opacitySliderInput").parent()
+                def slideHandle = properties_menu.firstElement()
+                actions.dragAndDropBy(slideHandle, -10, 0).perform()
+                break
             case "sharpness":
-                def slider = browser.page.$("#sharpenSlider")
-                def track = slider.find(".slider-track-high")
-                track.click()
-                track.click()
+                def properties_menu = browser.page.$("#sharpenSliderInput").parent()
+                def slideHandle = properties_menu.firstElement()
+                actions.dragAndDropBy(slideHandle, 10, 0).perform()
                 break
         }
-
         browser.driver.executeScript("return updateImageProperties(true) ;")
-        sleep(10000) // gives enough time for SOMETHING to change
-        imageProperties.push(getCanvasData())
+        sleep(10000) // gives enough time for SOMETHING to change  
+        imageProperties.push(getCanvasData()) 
 }
 
 And(~/I click the Summary Table button$/) { ->
@@ -373,16 +385,10 @@ Then(~/the image displays the annotations$/) { ->
 }
 
 Then(~/the layer's image pixels change$/) { ->
-    def allImagesAreDifferent = true
-    imageProperties.eachWithIndex {
-        canvasData1, index1 ->
-            imageProperties.eachWithIndex {
-                canvasData2, index2 ->
-                    if (index1 != index2)
-                    {
-                        assert canvasData1 != canvasData2
-                    }
-            }
+    int size = imageProperties.size()
+    for (int i = 0; i < size; i++) {
+        println "Checking image difference for property " + i
+        assert imageProperties.get(i) != defaultImageProperty
     }
 }
 
