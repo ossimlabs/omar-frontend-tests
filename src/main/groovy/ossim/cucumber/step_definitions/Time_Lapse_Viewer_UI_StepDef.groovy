@@ -217,7 +217,7 @@ And(~/I adjust the (.*) of a layer$/) {
             case "DRA":
                 def select = browser.page.$("#dynamicRangeSelect")
                 println select
-                println select.find( "option" )
+                select.find( "option" ).each { println it }
                 def option = select.find("option").find { it.text() == "Linear" }
                 option.click()
                 break
