@@ -216,6 +216,8 @@ And(~/I adjust the (.*) of a layer$/) {
                 break
             case "DRA":
                 def select = browser.page.$("#dynamicRangeSelect")
+                println select
+                println select.find( "option" )
                 def option = select.find("option").find { it.text() == "Linear" }
                 option.click()
                 break
