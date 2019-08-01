@@ -89,7 +89,7 @@ And(~/I add a (.*) annotation$/) {
         println "Adding ${annotation} annotation..."
 
         browser.driver.executeScript("return displayNavbar();")
-        def annotationsButton = browser.page.$(".annotations-control")
+        def annotationsButton = browser.page.$(".annotations-control")[ 0 ]
         annotationsButton.click()
 
         sleep(1000)
