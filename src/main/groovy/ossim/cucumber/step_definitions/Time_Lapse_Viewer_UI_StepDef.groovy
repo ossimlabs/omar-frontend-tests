@@ -89,12 +89,12 @@ And(~/I add a (.*) annotation$/) {
         println "Adding ${annotation} annotation..."
 
         browser.driver.executeScript("return displayNavbar();")
-        def annotationsButton = browser.page.$("body").find("a").find { it.@title == "Annotations" }
+        def annotationsButton = browser.page.$(".annotations-control")
         annotationsButton.click()
 
         sleep(1000)
 
-        def annotationButton = browser.page.$("body").find("a").find { it.text() == annotation.capitalize() }
+        def annotationButton = browser.page.$("body").find("button").find { it.text() == "Draw " + annotation.capitalize() }
         annotationButton.click()
 
         sleep(1000)
