@@ -89,12 +89,12 @@ And(~/I add a (.*) annotation$/) {
         println "Adding ${annotation} annotation..."
 
         browser.driver.executeScript("return displayNavbar();")
-        def annotationsButton = browser.page.$("body").find("a").find { it.@title == "Annotations" }
+        def annotationsButton = browser.page.$(".annotations-control")[ 0 ]
         annotationsButton.click()
 
         sleep(1000)
 
-        def annotationButton = browser.page.$("body").find("a").find { it.text() == annotation.capitalize() }
+        def annotationButton = browser.page.$("body").find("button").find { it.text() == "Draw " + annotation.capitalize() }
         annotationButton.click()
 
         sleep(1000)
@@ -158,7 +158,7 @@ And(~/I add a (.*) annotation$/) {
 
         imageProperties.push(getCanvasData())
 
-        browser.page.$("#annotationsDialog").find("button")[2].click()
+        browser.page.$("#annotationStylesDialog").find("button")[2].click()
         sleep(1000)
 }
 
@@ -168,7 +168,7 @@ And(~/I adjust the (.*) of a layer$/) {
         println "Adjusting ${imageProperty}"
     
         browser.driver.executeScript("return displayNavbar();")
-        def imagePropertiesButton = browser.page.$("body").find("a").find { it.@title == "Image Properties" }
+        def imagePropertiesButton = browser.page.$(".image-properties-control")[0]
         imagePropertiesButton.click()
 
 
