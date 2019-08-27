@@ -193,8 +193,8 @@ And(~/I adjust the (.*) of a layer$/) {
         switch (imageProperty)
         {
             case "bands":
-		def multiBandedImageIndex = browser.driver.executeScript("return tlv.layers.filter( function( layer ) { return layer.metadata.number_of_bands == 3; } );" )
-		println multiBandedImageIndex
+		// cycle through and get to an image that has multiple bands
+		browser.driver.executeScript("return while( tlv.layers[ tlv.currentLayer ].metadata.number_of_bands < 3 ) { changeFrame('fastForward'); }" )
 
                 def select = browser.page.$("#selectBandsMethodSelect")
                 def option = select.find("option").find { it.text() == "Manual" }
