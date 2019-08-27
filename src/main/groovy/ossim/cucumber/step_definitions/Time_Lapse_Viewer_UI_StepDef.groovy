@@ -193,10 +193,7 @@ And(~/I adjust the (.*) of a layer$/) {
         switch (imageProperty)
         {
             case "bands":
-		browser.driver.executeScript("return changeFrame('fastForward');" )
-                println browser.driver.executeScript("return tlv.currentLayer;" )
 		while( browser.driver.executeScript("return tlv.layers[ tlv.currentLayer ].metadata.number_of_bands;" ) < 3 ) {
-			println browser.driver.executeScript("return tlv.layers[ tlv.currentLayer ].metadata.number_of_bands;" )
 			browser.driver.executeScript("return changeFrame('fastForward');" )
 		}
 
