@@ -193,6 +193,9 @@ And(~/I adjust the (.*) of a layer$/) {
         switch (imageProperty)
         {
             case "bands":
+		def multiBandedImageIndex = browser.driver.executeScript("return tlv.layers.filter( function( layer ) { return layer.metadata.number_of_bands == 3; } );" )
+		println multiBandedImageIndex
+
                 def select = browser.page.$("#selectBandsMethodSelect")
                 def option = select.find("option").find { it.text() == "Manual" }
                 browser.driver.executeScript("return syncImageProperties();") // gets the gun selects populated
