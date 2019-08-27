@@ -194,9 +194,11 @@ And(~/I adjust the (.*) of a layer$/) {
         {
             case "bands":
 		browser.driver.executeScript("return changeFrame('fastForward');" )
-		println browser.driver.executeScript("return tlv.currentLayer;" )
-		// cycle through and get to an image that has multiple bands
-		browser.driver.executeScript("return function() { while( tlv.layers[ tlv.currentLayer ].metadata.number_of_bands < 3 ) { changeFrame('fastForward'); } }" )
+                println browser.driver.executeScript("return tlv.currentLayer;" )
+		while( browser.driver.executeScript("return tlv.layers[ tlv.currentLayer ].metadata.number_of_bands;" ) < 3 ) {
+			println browser.driver.executeScript("return tlv.layers[ tlv.currentLayer ].metadata.number_of_bands;" )
+			browser.driver.executeScript("return changeFrame('fastForward');" )
+		}
 
                 def select = browser.page.$("#selectBandsMethodSelect")
                 def option = select.find("option").find { it.text() == "Manual" }
