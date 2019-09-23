@@ -193,6 +193,10 @@ And(~/I adjust the (.*) of a layer$/) {
         switch (imageProperty)
         {
             case "bands":
+		while( browser.driver.executeScript("return tlv.layers[ tlv.currentLayer ].metadata.number_of_bands;" ) < 3 ) {
+			browser.driver.executeScript("return changeFrame('fastForward');" )
+		}
+
                 def select = browser.page.$("#selectBandsMethodSelect")
                 def option = select.find("option").find { it.text() == "Manual" }
                 browser.driver.executeScript("return syncImageProperties();") // gets the gun selects populated
