@@ -12,7 +12,7 @@ def homePageUrl = config.pkiUrl
 remoteDisplay = null
 
 Given(~/^I am starting the selenium server$/) { ->
-    println "Starting browser..."
+    println "Starting selenium server..."
     def command = ["Xvfb", ":1", "-screen", "0", "1366x768x24", "-ac"]
     remoteDisplay = command.execute()
     sleep(3000)
@@ -25,12 +25,12 @@ Given(~/^I am starting the browser$/) { ->
 }
 
 Given(~/^I am stopping the selenium server$/) { ->
-    println "Stopping browser"
+    println "Stopping selenium server..."
     remoteDisplay.waitForOrKill(1)
 }
 
 Given(~/^I am stopping the browser$/) { ->
-    println "Stopping browser"
+    println "Stopping browser..."
     browser.quit()
 }
 
