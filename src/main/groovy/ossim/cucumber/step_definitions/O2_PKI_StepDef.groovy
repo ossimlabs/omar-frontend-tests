@@ -9,7 +9,6 @@ this.metaClass.mixin(cucumber.api.groovy.EN)
 
 def config = CucumberConfig.config
 def pkiHomePageUrl = config.pkiUrl
-def browser
 remoteDisplay = null
 
 Given(~/^I am starting the selenium server$/) { ->
@@ -39,6 +38,7 @@ Given(~/^I am stopping the selenium server$/) { ->
 
 
 Given(~/^that I try to enter the omar pki home page using Firefox$/) { ->
+    println("Going to pki home page $pkiHomePageUrl")
     browser.go(pkiHomePageUrl)
     println "Page Title: ${browser.getTitle()}"
 }
