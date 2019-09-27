@@ -8,7 +8,8 @@ this.metaClass.mixin(cucumber.api.groovy.Hooks)
 this.metaClass.mixin(cucumber.api.groovy.EN)
 
 def config = CucumberConfig.config
-def homePageUrl = config.pkiUrl
+def pkiHomePageUrl = config.pkiUrl
+def browser
 remoteDisplay = null
 
 Given(~/^I am starting the selenium server$/) { ->
@@ -37,9 +38,9 @@ Given(~/^I am stopping the selenium server$/) { ->
 }
 
 
-/*
 Given(~/^that I try to enter the omar pki home page using Firefox$/) { ->
-
+    browser.go(pkiHomePageUrl)
+    println "Page Title: ${browser.getTitle()}"
 }
 
 When(~/^I attempt to log in without a pki$/) { ->
@@ -49,5 +50,4 @@ When(~/^I attempt to log in without a pki$/) { ->
 Then(~/^it does not let me into the omar$/) { ->
 
 }
- */
 

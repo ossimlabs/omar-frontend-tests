@@ -7,8 +7,8 @@ Feature: O2_PKI
     Scenario: Start browser
       Given I am starting the browser
 
-#    Scenario: Missing PKI
-#      Given that I try to enter the omar pki home page using Firefox
+    Scenario: Missing PKI
+      Given that I try to enter the omar pki home page using Firefox
 #      When I attempt to log in without a pki
 #      Then it does not let me into omar
 
