@@ -12,7 +12,7 @@ def homePageUrl = config.pkiUrl
 remoteDisplay = null
 
 Given(~/^I am starting the selenium server$/) { ->
-    println "Starting browser..."
+    println "Starting selenium server..."
     def command = ["Xvfb", ":1", "-screen", "0", "1366x768x24", "-ac"]
     remoteDisplay = command.execute()
     sleep(3000)
@@ -24,15 +24,18 @@ Given(~/^I am starting the browser$/) { ->
     sleep(3000)
 }
 
-Given(~/^I am stopping the selenium server$/) { ->
-    println "Stopping browser"
-    remoteDisplay.waitForOrKill(1)
+Given(~/^I am stopping the browser$/) { ->
+    println "Stopping browser..."
+    browser.quit()
+    sleep(3000)
 }
 
-Given(~/^I am stopping the browser$/) { ->
-    println "Stopping browser"
-    browser.quit()
+Given(~/^I am stopping the selenium server$/) { ->
+    println "Stopping selenium server..."
+    remoteDisplay.waitForOrKill(1)
+    sleep(3000)
 }
+
 
 /*
 Given(~/^that I try to enter the omar pki home page using Firefox$/) { ->

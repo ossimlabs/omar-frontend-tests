@@ -12,8 +12,8 @@ Feature: O2_PKI
 #      When I attempt to log in without a pki
 #      Then it does not let me into omar
 
-    Scenario: Stop Selenium
-      Given I am stopping the selenium server
-
     Scenario: Stop browser
       Given I am stopping the browser
+
+    Scenario: Stop Selenium
+      Given I am stopping the selenium server
