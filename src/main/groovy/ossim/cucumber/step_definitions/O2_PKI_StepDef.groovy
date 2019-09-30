@@ -8,8 +8,7 @@ this.metaClass.mixin(cucumber.api.groovy.Hooks)
 this.metaClass.mixin(cucumber.api.groovy.EN)
 
 def config = CucumberConfig.config
-// def pkiHomePageUrl = config.pkiUrl
-def pkiHomePageUrl = "https://pki-omar-dev.ossim.io"
+def pkiHomePageUrl = config.pkiUrl
 remoteDisplay = null
 browser = null
 
@@ -45,7 +44,7 @@ Given(~/^that I try to enter the O2 pki home page without a pki$/) { ->
 }
 
 Then(~/^it does not let me into O2$/) { ->
-    println("Checking can't access O2 without a pki...")
+    println("Verifying failure to access O2 without a pki...")
     assert browser.title != "O2"
     assert browser.$("h1").text() == "Secure Connection Failed"
 }
