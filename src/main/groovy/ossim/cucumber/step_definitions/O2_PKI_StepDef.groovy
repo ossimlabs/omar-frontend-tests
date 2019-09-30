@@ -40,10 +40,12 @@ Given(~/^I am stopping the selenium server$/) { ->
 
 
 Given(~/^that I try to enter the O2 pki home page without a pki$/) { ->
+    println("Going to pki home page: $pkiHomePageUrl...")
     browser.go(pkiHomePageUrl)
 }
 
 Then(~/^it does not let me into O2$/) { ->
+    println("Checking can't access O2 without a pki...")
     assert browser.title != "O2"
     assert browser.$("h1").text() == "Secure Connection Failed"
 }
