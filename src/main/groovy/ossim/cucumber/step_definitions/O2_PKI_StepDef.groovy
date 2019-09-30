@@ -10,6 +10,7 @@ this.metaClass.mixin(cucumber.api.groovy.EN)
 def config = CucumberConfig.config
 def pkiHomePageUrl = config.pkiUrl
 remoteDisplay = null
+browser = null
 
 Given(~/^I am starting the selenium server$/) { ->
     println "Starting selenium server..."
@@ -37,17 +38,13 @@ Given(~/^I am stopping the selenium server$/) { ->
 }
 
 
-Given(~/^that I try to enter the omar pki home page using Firefox$/) { ->
-    println("Going to pki home page $pkiHomePageUrl")
+Given(~/^that I try to enter the O2 pki home page without a pki$/) { ->
     browser.go(pkiHomePageUrl)
-    println "Page Title: ${browser.getTitle()}"
 }
 
-When(~/^I attempt to log in without a pki$/) { ->
-
-}
-
-Then(~/^it does not let me into the omar$/) { ->
-
+Then(~/^it does not let me into the O2$/) { ->
+    browser = new Browser(driver: new FirefoxDriver())
+    assert browser.title != "O2"
+    assert browser.$("h1").text() == "Secure Connection Failed"
 }
 
