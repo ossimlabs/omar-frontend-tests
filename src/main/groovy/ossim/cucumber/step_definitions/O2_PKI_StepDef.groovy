@@ -8,7 +8,6 @@ this.metaClass.mixin(cucumber.api.groovy.Hooks)
 this.metaClass.mixin(cucumber.api.groovy.EN)
 
 def pkiHomePageUrl = config.pkiUrl
-def pkiHomePageUrl = "https://pki-omar-dev.ossim.io"
 remoteDisplay = null
 browser = null
 
