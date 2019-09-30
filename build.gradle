@@ -44,10 +44,10 @@ task frontend() {
                     "--tags",
                     "@pki",
                     //"@o2_ui_search, @tlv_ui, @video_vrails",
-                    // "@tlv_ui",
+                    "@tlv_ui",
                     //"@swagger_ui",
-                    // "--tags",
-                    // "~@C2S",
+                    "--tags",
+                    "~@C2S",
                     '--plugin', 'json:build/frontend.json',
                     '--glue', 'src/main',
                     'src/cucumber/resources']
