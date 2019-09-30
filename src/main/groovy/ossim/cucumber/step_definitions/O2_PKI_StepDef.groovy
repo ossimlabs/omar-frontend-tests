@@ -43,7 +43,7 @@ Given(~/^that I try to enter the O2 pki home page without a pki$/) { ->
     browser.go(pkiHomePageUrl)
 }
 
-Then(~/^it does not let me into the O2$/) { ->
+Then(~/^it does not let me into O2$/) { ->
     browser = new Browser(driver: new FirefoxDriver())
     assert browser.title != "O2"
     assert browser.$("h1").text() == "Secure Connection Failed"
