@@ -44,6 +44,7 @@ task frontend() {
                     "--tags",
                     "@pki",
                     //"@o2_ui_search, @tlv_ui, @video_vrails",
+                    "--tags",
                     "@tlv_ui",
                     //"@swagger_ui",
                     "--tags",
